@@ -1,0 +1,21 @@
+{
+  "name": "three-test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-dropzone": "^4.2.3",
+    "react-scripts": "1.0.17",
+    "superagent": "^3.8.1",
+    "three": "^0.88.0",
+    "three-orbitcontrols": "^1.2.1",
+    "three-transform-controls": "^1.0.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
