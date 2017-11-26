@@ -93,7 +93,7 @@ class ThreeGallery extends Component{
       const z = (ptgDimZ * 5)
       let paintingGeometry = new THREE.BoxGeometry(x, y, z)
       let paintingMaterial = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
-      let borderMaterial = new THREE.MeshBasicMaterial({color: "#ffffff"});
+      let borderMaterial = new THREE.MeshLambertMaterial({color: "#ffffff"});
 
       let materials = [
         borderMaterial, borderMaterial, borderMaterial, borderMaterial, paintingMaterial, borderMaterial

@@ -6,7 +6,11 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-dropzone": "^4.2.3",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "superagent": "^3.8.1",
     "three": "^0.88.0",
     "three-orbitcontrols": "^1.2.1",
@@ -17,5 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.2"
   }
 }
