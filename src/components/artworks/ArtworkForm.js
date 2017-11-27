@@ -66,14 +66,23 @@ class ArtworkForm extends Component{
 
     this.props.createArtwork(artwork)
 
+    this.setState({
+      artist: "",
+      title: "",
+      date: "",
+      materials: "",
+      image_url: "",
+      dim_X: "",
+      dim_Y: ""
+    })
+
   }
 
+// style={{"color": "blue"}}
 
+// <div class="" aria-disabled="false" style="width: 200px; height: 200px; border-width: 2px; border-color: rgb(102, 102, 102); border-style: dashed; border-radius: 5px;"><p>Drop your files or click here to upload</p><input type="file" accept="image/*" autocomplete="off" style="display: none;"></div>
 
   render(){
-    console.log("In artwork form")
-    console.log("state:", this.state)
-    console.log("props:", this.props.user.id)
     return(
       <div>
         <div className="file-upload">
@@ -81,6 +90,7 @@ class ArtworkForm extends Component{
             onDrop={this.handleDrop}
             multiple={false}
             accept="image/*"
+            style={{"width": "200px", "height": "200px", "borderWidth": "2px", "borderColor": "rgb(102, 102, 102)", "borderStyle": "dashed", "borderRadius": "5px", "margin": "0 auto" }}
             >
             <p>Drop your files or click here to upload</p>
           </Dropzone>
@@ -90,19 +100,19 @@ class ArtworkForm extends Component{
           {this.state.image_url === "" ? null :
           <div>
             <p>{this.state.uploadFile.name}</p>
-            <img alt="successful upload" src={this.state.image_url}/>
+            <img alt="successful upload" src={this.state.image_url} style={{"width": "150px", "margin": "0 auto"}}/>
           </div>}
 
         </div>
-        <div className="artwork-text">
-          <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+        <div id="artwork-form" className="artwork-text">
+          <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
             <p>
             <label>Artist</label>
-            <input type="text" name="artist"/>
+            <input type="text" name="artist" value={this.state.artist} />
             </p>
             <p>
             <label>Title</label>
-            <input type="text" name="title" />
+            <input type="text" name="title" value={this.state.title}/>
             </p>
             <p>
             <label>Date</label>
@@ -110,27 +120,18 @@ class ArtworkForm extends Component{
             </p>
             <p>
             <label>Materials</label>
-            <input type="text" name="materials" />
+            <input type="text" name="materials" value={this.state.materials} />
             </p>
             <p>
             <label>Width in inches</label>
-            <input type="number" name="dim_X"/>
+            <input type="number" name="dim_X" value={this.state.dim_X}/>
             </p>
             <p>
             <label>Height in inches</label>
-            <input type="number" name="dim_Y"/>
+            <input type="number" name="dim_Y" value={this.state.dim_Y}/>
             </p>
             <input type="submit" value="Save" />
 
-            {
-            //artist
-            //date
-            //dim_x
-            //dim_y
-            //image_url
-            //materials
-            //title
-          }
           </form>
         </div>
       </div>

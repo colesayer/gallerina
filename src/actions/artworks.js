@@ -27,7 +27,8 @@ export function createArtwork(params){
   return function(dispatch){
     ArtworkApi.createArtwork(params)
       .then((artwork) => {
-        console.log("in createArtwork", artwork)
+        console.log("created new artwork")
+        dispatch(saveArtwork(artwork))
       })
   }
 }
