@@ -14,7 +14,6 @@
     "redux-thunk": "^2.2.0",
     "superagent": "^3.8.1",
     "three": "^0.88.0",
-    "three-orbitcontrols": "^1.2.1",
     "three-transform-controls": "^1.0.4"
   },
   "scripts": {

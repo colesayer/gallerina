@@ -9,6 +9,11 @@ body {
   width:  100%;
 }
 
+.container a{
+  padding: 10px;
+}
+
+
 .artwork-list {
   width: 50%;
   height: 50%;
@@ -20,16 +25,24 @@ body {
   list-style: none;
 }
 
-/*.gallery-list{
+.gallery-list{
   position: relative;
   width: 50%;
   padding: 10;
   float: left;
-}*/
+}
 
 .gallery-list ul {
   list-style: none;
 }
+
+.gallery-form {
+  width: 50%;
+  height: 50%;
+  margin: 10;
+  float: left;
+}
+
 
 .artwork-form {
   width: 50%;
