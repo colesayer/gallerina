@@ -85,6 +85,7 @@ class ArtworkForm extends Component{
   render(){
     return(
       <div>
+        <p><strong>Upload A New Artwork</strong></p>
         <div className="file-upload">
           <Dropzone
             onDrop={this.handleDrop}

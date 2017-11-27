@@ -14,6 +14,7 @@ class UserContainer extends Component{
   }
 
   render(){
+    console.log("userContainer:", this.props.user)
     if(this.props.user.id){
       console.log("there is a user")
     } else {
@@ -23,13 +24,13 @@ class UserContainer extends Component{
     return(
       <div>
         {this.props.user.id ? (
-          < Redirect to='/home'/>
+          < Redirect to={`/users/${this.props.user.id}`}/>
         ) : (
           < Redirect to='/login'/>
         )}
         <Switch>
           <Route path={"/login"} render={() => (<UserLogin onSubmit={this.handleSubmit}/>)}/>
-          <Route path={"/home"} component={HomeContainer}/>
+          <Route path={"/users/:id"} component={HomeContainer}/>
         </Switch>
       </div>
     )

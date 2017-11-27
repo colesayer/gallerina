@@ -82,7 +82,9 @@ class GalleryForm extends Component{
   render(){
     const floorTexturePicker = floorTextureUrls.map((texture, idx) => (<GalleryFloor key={idx} image={texture} addFloor={this.handleFloorTexture}/>))
     return(
+
       <div>
+        <p><strong>Create A New Gallery</strong></p>
         <form onSubmit={this.handleSubmit}>
           <p>
           <label> Gallery Name: </label>
