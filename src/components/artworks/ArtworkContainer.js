@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchArtworks } from '../../actions/artworks.js';
 import ArtworkList from './ArtworkList.js';
 import ArtworkForm from './ArtworkForm.js';
 
@@ -12,7 +11,6 @@ class ArtworkContainer extends Component {
   }
 
   render(){
-    console.log("in artworkcontainer", this.props.user)
     return(
       <div>
         {this.props.isLoading ? <p>Loading Artworks</p> : <p>Artworks</p>}
@@ -35,12 +33,12 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    fetchArtworks: () => {
-      dispatch(fetchArtworks())
-    }
-  }
-}
+// function mapDispatchToProps(dispatch){
+//   return {
+//     fetchArtworks: () => {
+//       dispatch(fetchArtworks())
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArtworkContainer)
+export default connect(mapStateToProps)(ArtworkContainer)
