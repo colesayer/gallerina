@@ -2,8 +2,7 @@ import * as THREE from 'three'
 var TransformControls = require('../../../node_modules/three-transform-controls')(THREE);
 
 
-export function threeArtwork(artwork, idx, camera, canvas, scene){
-  console.log("in threeArtworks:", artwork)
+export function threeArtwork(artwork, idx, camera, canvas, scene, addToArray, addToControlsArray){
 
   //FOR PAINTING DIMS
   const ptgDimX = artwork.dim_x
@@ -25,21 +24,28 @@ export function threeArtwork(artwork, idx, camera, canvas, scene){
         borderMaterial, borderMaterial, borderMaterial, borderMaterial, paintingMaterial, borderMaterial
       ]
 
-//       "If you want the conceptual origin to be somewhere other than (0, 0, 0), put your mesh in an Object3D and translate it such that the conceptual center of the mesh is at the Object3D's origin."
-// This advice saved me so much time. Thanks a ton eric-wieser!
 
       let paintingMesh = new THREE.Mesh(paintingGeometry, materials)
-        paintingMesh.position.set(
-          Math.random() * 1000 - 500,
-          Math.random() * 950 - 475,
-          Math.random() * 800 - 400)
+      paintingMesh.position.set(
+        Math.random() * 1000 - 500,
+        Math.random() * 950 - 475,
+        Math.random() * 800 - 400)
+      // paintingMesh.castShadow = true
+      // paintingMesh.name = idx
 
       let paintingControls = new TransformControls(camera, canvas)
-        paintingControls.attach(paintingMesh)
+      paintingControls.attach(paintingMesh)
+      paintingControls.visible = false
+
+      addToArray(paintingMesh)
+      addToControlsArray(paintingControls)
 
       let group = new THREE.Group()
-        group.add(paintingMesh)
-        group.add(paintingControls)
+      group.add(paintingMesh)
+      group.add(paintingControls)
+      group.name = idx
+
+
 
 
       scene.add(group)

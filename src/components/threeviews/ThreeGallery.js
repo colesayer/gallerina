@@ -17,6 +17,7 @@ export function threeGallery(x, y, z, floorImage, wallColor, scene, ){
       const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
         floorMesh.position.y = 0;
         floorMesh.rotation.x = - Math.PI / 2;
+        // floorMesh.receiveShadow = true
       scene.add(floorMesh)
     })
 
@@ -33,6 +34,7 @@ export function threeGallery(x, y, z, floorImage, wallColor, scene, ){
            leftWall.position.y =  (dimZ/2);
            leftWall.position.x = -(dimX/2);
            leftWall.rotation.y = degra(90);
+          //  leftWall.receiveShadow = true
            scene.add( leftWall );
 
      //RIGHT WALL
@@ -41,6 +43,7 @@ export function threeGallery(x, y, z, floorImage, wallColor, scene, ){
          rightWall.position.y =  (dimZ/2);
          rightWall.position.x =  (dimX/2);
          rightWall.rotation.y =  - Math.PI / 2;
+        //  rightWall.receiveShadow = true
          scene.add( rightWall );
 
       //FAR WALL
@@ -50,6 +53,7 @@ export function threeGallery(x, y, z, floorImage, wallColor, scene, ){
            farWall.position.x =   0;
            farWall.position.z =  -(dimY/2);
            farWall.rotation.x = - degra(0);
+          //  farWall.receiveShadow = true
            scene.add( farWall );
 
       //NEAR WALL
@@ -59,6 +63,7 @@ export function threeGallery(x, y, z, floorImage, wallColor, scene, ){
       //      nearWall.position.x =   0;
       //      nearWall.position.z =   (dimY/2);
       //      nearWall.rotation.x = - degra(0);
+              // nearWall.receiveShadow = true
       //      scene.add( nearWall );
 
 }
