@@ -243,6 +243,10 @@ this.controlsArray.forEach(control => {
       control.setSize(.5)
       control.setMode("translate")
       break
+    case 67:
+      this.camera.up.set( 0, 0, 0 );
+      this.camera.position.set(0, 500, 1500)
+      break
   }
  })
  }
@@ -264,7 +268,7 @@ this.controlsArray.forEach(control => {
   render(){
     return(
       <div>
-      <p>"T" for translate controls || "R" for rotate controls</p>
+      <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera</p>
       </div>
     )
   }
