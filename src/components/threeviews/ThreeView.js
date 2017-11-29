@@ -3,6 +3,10 @@ import * as THREE from 'three';
 import TrackballControls from '../../ref/trackball.js'
 import { threeArtwork } from './ThreeArtwork.js'
 import { threeGallery } from './ThreeGallery.js'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { saveScene, clearArtworkSelection } from '../../actions/threeviews.js'
+import { threeSavedArtwork } from './ThreeSavedArtwork.js'
 
 class ThreeView extends Component{
 
@@ -21,143 +25,41 @@ class ThreeView extends Component{
   document.addEventListener("keydown", this.onKeyPressed.bind(this))
   document.addEventListener("keyup", this.onKeyUp.bind(this))
 
-  //CREATE CANVAS
-  this.canvas = document.createElement('div')
-  this.canvas.setAttribute("id", "Canvas")
-
-  this.canvasContainer = document.getElementById('CanvasContainer')
-  this.canvasContainer.appendChild(this.canvas)
-
-  this.canvasArea = this.canvas.getBoundingClientRect()
-
   this.selectedArtwork
   this.artworkArray = [];
   this.controlsArray = [];
-  this.INTERSECTED
+  this.wallsArray = [];
 
+  //CREATE CANVAS
+  this.canvas = document.createElement('div')
+  this.canvas.setAttribute("id", "Canvas")
+  this.canvasContainer = document.getElementById('CanvasContainer')
+  this.canvasContainer.appendChild(this.canvas)
+  this.canvasArea = this.canvas.getBoundingClientRect()
 
   //RENDERER
   this.renderer = new THREE.WebGLRenderer({antialias: true})
-    this.renderer.setClearColor(0xffffff, 1)
-    this.renderer.setSize(this.canvasArea.width, this.canvasArea.height);
-    this.renderer.domElement.style.zIndex = 5;
-    // this.renderer.shadowMapEnabled = true
-    // this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
-    this.canvas.appendChild(this.renderer.domElement);
+  this.renderer.setClearColor(0xffffff, 1)
+  this.renderer.setSize(this.canvasArea.width, this.canvasArea.height);
+  this.renderer.domElement.style.zIndex = 5;
+  this.canvas.appendChild(this.renderer.domElement);
 
   //CAMERA
   this.camera = new THREE.PerspectiveCamera(50, this.canvasArea.width / this.canvasArea.height, 1, 100000);
-    this.camera.position.set(0, 500, 1500)
-    // {x: 9.498041602691048, y: 289.94291071603584, z: 1365.8826499929608}
-    // this.camera.up = new THREE.Vector3(0,0,0)
-    // this.camera.lookAt(new THREE.Vector3(0, 0, 0))
-
+  this.camera.position.set(0, 500, 1500)
 
   //CONTROLS
   this.controls = new TrackballControls(this.camera, this.canvas);
-    this.controls.rotateSpeed = 1.0;
-    this.controls.zoomSpeed = 1.0;
-    this.controls.panSpeed = 1.0;
-    this.controls.noZoom = false;
-    this.controls.noPan = false;
-    this.controls.staticMoving = false;
-    this.controls.dynamicDampingFactor = 0.3;
-
-    //RotateControl
-    var plane;
-    var selectedObject;
-    var projector = new THREE.Projector();
-    var offset = new THREE.Vector3();
-
-
-    plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 18, 18), new THREE.MeshBasicMaterial() );
-    plane.visible = false;
-
-    // this.canvas.onmousemove = mouseMoveFxn.bind(this)
-    // function mouseMoveFxn(event) {
-    //   event.preventDefault()
-    //
-    //   var boundingRect = this.canvas.getBoundingClientRect();
-    //   var x = (event.clientX - boundingRect.left)
-    //   var y = (event.clientY - boundingRect.top)
-    //
-    //   var mouse_x = ( (x / this.canvasArea.width) * 2 - 1);
-    //   var mouse_y = - ( y / this.canvasArea.height) * 2 + 1;
-    //
-    //   var vector = new THREE.Vector3( mouse_x, mouse_y, 0.5)
-    //   vector.unproject(this.camera)
-    //
-    //   var raycaster = new THREE.Raycaster( this.camera.position, vector.sub( this.camera.position ).normalize() );
-    //
-    //     var intersects = raycaster.intersectObjects(this.artworkArray, true)
-    //     if ( intersects.length > 0 ) {
-    //       if ( this.INTERSECTED != intersects[ 0 ].object ) {
-    //         if (this.INTERSECTED) this.INTERSECTED.parent.children[1].visible = this.INTERSECTED.current
-    //
-    //          this.INTERSECTED = intersects[0].object
-    //          this.INTERSECTED.current = this.INTERSECTED.parent.children[1].visible
-    //          this.INTERSECTED.parent.children[1].visible = true
-    //
-    //
-    //
-    //         //  if (this.INTERSECTED) this.INTERSECTED.parent.children[1].visible = true
-    //       //    this.INTERSECTED.parent.children[1].visible = true
-    //         // this.INTERSECTED.current = true
-    //         // this.INTERSECTED.current = (this.INTERSECTED.parent.children[1].visible === false) ? (this.INTERSECTED.parent.children[1].visible = true) : (this.INTERSECTED.parent.children[1].visible = false)
-    //       // plane.position.copy( intersects[0].object.position);
-    //       // plane.lookAt( this.camera.position );
-    //       // console.log()
-    //       // intersects[0].object.parent.children[1].visible = true
-    //       // console.log("if", this.INTERSECTED)
-    //     }
-    //     } else {
-    //       if ( this.INTERSECTED ) this.INTERSECTED.parent.children[1].visible = this.INTERSECTED.current
-    //
-		// 			this.INTERSECTED = null;
-    //       // console.log("else", this.INTERSECTED)
-    //   }
-    // }
-    //
-    // this.canvas.onmousedown = mouseDownFxn.bind(this)
-    // function mouseDownFxn(event) {
-    //   event.preventDefault()
-    //
-    //   var boundingRect = this.canvas.getBoundingClientRect();
-    //
-    //   var x = (event.clientX - boundingRect.left)
-    //   var y = (event.clientY - boundingRect.top)
-    //
-    //   var mouse_x = ( (x / this.canvasArea.width) * 2 - 1);
-    //   var mouse_y = - ( y / this.canvasArea.height) * 2 + 1;
-    //
-    //
-    //   var vector = new THREE.Vector3(mouse_x, mouse_y, 0.5);
-    //   vector.unproject(this.camera);
-    //   var raycaster = new THREE.Raycaster(this.camera.position, vector.sub(this.camera.position).normalize());
-    //   var intersects = raycaster.intersectObjects(this.artworkArray, true)
-    //
-    //   if (intersects.length > 0) {
-    //     // intersects[0].object.rotation.y += Math.PI/2
-    //     console.log(intersects[0])
-    //     // intersects = raycaster.intersectObject(plane);
-    //     // offset.copy(intersects[0].point).sub(plane.position)
-    //   }
-    // }
-
-    // this.canvas.onmouseup = mouseUpFxn.bind(this)
-    // function mouseUpFxn(event) {
-    //   event.preventDefault()
-    //   this.controls.enabled = true;
-    //   selectedObject = null;
-    // }
-
-
-
-
+  this.controls.rotateSpeed = 1.0;
+  this.controls.zoomSpeed = 1.0;
+  this.controls.panSpeed = 1.0;
+  this.controls.noZoom = false;
+  this.controls.noPan = false;
+  this.controls.staticMoving = false;
+  this.controls.dynamicDampingFactor = 0.3;
 
   //SCENE
   this.scene = new THREE.Scene();
-
 
   //LIGHT1
   const keyLight = new THREE.AmbientLight(0xffffff, 0.5)
@@ -172,17 +74,10 @@ class ThreeView extends Component{
 
 
 
-  //PAINTING OBJECTS
-
-  this.props.artworks.forEach((artwork, idx) => {
-    threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray )
-    console.log("in painting Objs", this.artworkArray)
-  })
-
   //GALLERY OBJECT
-  const dimX = (this.props.gallery.dim_x)
-  const dimY = (this.props.gallery.dim_y)
-  const dimZ = (this.props.gallery.dim_z)
+  // const dim_x = (this.props.gallery.dim_x)
+  // const dim_y = (this.props.gallery.dim_y)
+  // const dim_z = (this.props.gallery.dim_z)
 
   const {
     dim_x,
@@ -192,13 +87,46 @@ class ThreeView extends Component{
     wall_color
   } = this.props.gallery
 
-  threeGallery(dimX, dimY, dimZ, floor_texture, wall_color, this.scene)
+  threeGallery(dim_x, dim_y, dim_z, floor_texture, wall_color, this.scene, this.addToWallsArray)
+
+  //New Paintings
+  this.props.artworks.forEach((artwork, idx) => {
+    console.log("in Painting Objects:", this.wallsArray)
+    threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray, dim_x, dim_y, dim_z )
+  })
+
+  //Saved Paintings
+  this.props.scene.forEach(artwork => {
+    threeSavedArtwork(artwork, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray)
+  })
+
+
+  var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+  var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+  var sphere = new THREE.Mesh( geometry, material );
+  this.scene.add( sphere );
+
+
+
+
+
 
   this.start()
 
   }
 
   componentWillUnmount() {
+    var filteredScene = this.scene.children.filter(child => (child.name === "artwork"))
+    console.log("IN UNMOUNT", filteredScene)
+
+    var paintingsToSave = []
+    for(let i = 0; i < filteredScene.length; i++){
+      paintingsToSave.push(filteredScene[i].children[0])
+    }
+    // var filteredPaintings = filteredScene.filter(child => (child.children[0].name === "painting"))
+    // console.log("IN UNMOUNT", filteredPaintings)
+    this.props.saveScene(paintingsToSave)
+    this.props.clearArtworkSelection()
     this.stop()
     this.canvas.removeChild(this.renderer.domElement)
     this.canvasContainer.removeChild(this.canvas)
@@ -229,7 +157,17 @@ addToControlsArray = (obj) => {
   this.controlsArray.push(obj)
 }
 
+addToWallsArray = (obj) => {
+  this.wallsArray.push(obj)
+}
+
 onKeyPressed = (e) => {
+if (e.which === 67){
+  this.camera.up.set( 0, 0, 0 );
+  this.camera.position.set(0, 500, 1500)
+  this.controls.reset()
+  return
+}
 this.controlsArray.forEach(control => {
   switch(e.which){
     case 82:
@@ -243,6 +181,11 @@ this.controlsArray.forEach(control => {
       control.setSize(.5)
       control.setMode("translate")
       break
+    // case 67:
+    //   this.camera.up.set( 0, 0, 0 );
+    //   this.camera.position.set(0, 500, 1500)
+    //   this.controls.reset()
+    //   break
   }
  })
  }
@@ -264,10 +207,23 @@ this.controlsArray.forEach(control => {
   render(){
     return(
       <div>
-      <p>"T" for translate controls || "R" for rotate controls</p>
+      <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera</p>
       </div>
     )
   }
 }
 
-export default ThreeView
+const mapStateToProps = (state) => {
+  return{
+    scene: state.scene
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    saveScene: saveScene,
+    clearArtworkSelection: clearArtworkSelection,
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThreeView)
