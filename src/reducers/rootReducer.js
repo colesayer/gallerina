@@ -1,5 +1,5 @@
 export default function rootReducer(
-  state = {user: {}, artworks: [], selectedArtworks: [], galleries: [], selectedGallery: {}, isLoading: false},
+  state = {user: {}, artworks: [], selectedArtworks: [], galleries: [], selectedGallery: {}, scene: [], isLoading: false},
   action
 ){
   switch(action.type){
@@ -21,6 +21,10 @@ export default function rootReducer(
       return {...state, galleries: state.galleries.concat(action.payload)}
     case 'SELECT_GALLERY':
       return {...state, selectedGallery: action.payload}
+    case 'CREATE_SCENE':
+      return {...state, scene: action.payload}
+    case 'CLEAR_ARTWORKS':
+      return {...state, selectedArtworks: []}
     default:
       return state
   }
