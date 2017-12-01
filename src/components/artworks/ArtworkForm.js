@@ -9,8 +9,6 @@ const CLOUDINARY_UPLOAD_PRESET = 'ndhbgk9z'
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dwnehv6tb/image/upload'
 
 
-//NEED USER INFO TO SUBMIT FORM!!!!!!!!!!!
-
 class ArtworkForm extends Component{
 
   state = {

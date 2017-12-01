@@ -1,7 +1,11 @@
 export default class GalleryApi{
 
+  static fetchGalleries(user_id){
+    return fetch(`http://localhost:3000/users/${user_id}/galleries`).then((res) => res.json())
+  }
+
   static createGallery(params){
-    return fetch('http://localhost:3000/api/v1/galleries', {method: "post", headers: {
+    return fetch(`http://localhost:3000/users/${params.user_id}/galleries`, {method: "post", headers: {
       "Content-Type":"application/json",
       "Accept":"application/json"
     },

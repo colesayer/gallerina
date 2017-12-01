@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router-dom';
+import { fetchUser } from '../../actions/users.js'
+import { fetchArtworks, createArtwork } from '../../actions/artworks.js'
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import ArtworkList from './ArtworkList.js';
 import ArtworkForm from './ArtworkForm.js';
 
 class ArtworkContainer extends Component {
 
   componentDidMount(){
-    // this.props.fetchArtworks()
+    if(!this.props.user.id)this.props.fetchUser()
+    if(this.props.user.id)this.props.fetchArtworks(this.props.user.id)
+
   }
 
   render(){
     return(
       <div>
+
         {this.props.isLoading ? <p>Loading Artworks</p> : <p>Artworks</p>}
         <div className="artwork-list">
           <ArtworkList artworks={this.props.artworks}/>
         </div>
         <div className="artwork-form">
-          <ArtworkForm user={this.props.user}/>
+          <ArtworkForm user={this.props.user} />
         </div>
+
       </div>
     )
   }
@@ -33,12 +39,11 @@ function mapStateToProps(state){
   }
 }
 
-// function mapDispatchToProps(dispatch){
-//   return {
-//     fetchArtworks: () => {
-//       dispatch(fetchArtworks())
-//     }
-//   }
-// }
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    fetchArtworks: fetchArtworks,
+    fetchUser: fetchUser
+  }, dispatch)
+}
 
-export default connect(mapStateToProps)(ArtworkContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ArtworkContainer)

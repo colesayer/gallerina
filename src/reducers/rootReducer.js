@@ -13,6 +13,8 @@ export default function rootReducer(
       return {...state, isLoading: true}
     case 'FETCHED_GALLERIES':
       return {...state, galleries: action.payload, isLoading: false}
+    case 'FETCHING_GALLERIES':
+      return {...state, isLoading: true}
     case 'CREATE_ARTWORK':
       return {...state, artworks: state.artworks.concat(action.payload)}
     case 'SELECT_ARTWORK':

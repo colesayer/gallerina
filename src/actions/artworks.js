@@ -1,9 +1,10 @@
 import ArtworkApi from '../services/artworkapi.js'
 
-export function fetchArtworks(){
+export function fetchArtworks(user_id){
+  console.log("in artworks.js fetchArtworks", user_id)
   return function(dispatch){
     dispatch(fetchingArtworks())
-    ArtworkApi.fetchArtworks().then(artworks => {
+    ArtworkApi.fetchArtworks(user_id).then(artworks => {
         dispatch(fetchedArtworks(artworks))
       })
   }
@@ -14,7 +15,7 @@ function fetchedArtworks(artworks){
     type: 'FETCHED_ARTWORKS',
     payload: artworks
   }
-}
+} 
 
 function fetchingArtworks(){
   return{
