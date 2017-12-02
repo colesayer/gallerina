@@ -60,3 +60,18 @@ body {
   display: block;
   align-content: center;
 }
+
+.navbar{
+  float: left;
+  display: block;
+  width: 100%;
+  height: 10vh;
+}
+
+.title{
+  margin-top: 0;
+  padding-top: 0;
+  padding-left: 10px;
+  color: blue;
+  float: left;
+}
