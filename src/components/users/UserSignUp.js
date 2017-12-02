@@ -47,7 +47,7 @@ class UserSignUp extends Component{
           <p>
           <label>Password: </label>
           </p>
-          <input type="password" placeholder="Password" name="password" value={this.state.email}/>
+          <input type="password" placeholder="Password" name="password" value={this.state.password}/>
           <p>
           <label>Confirm Password:</label>
           </p>

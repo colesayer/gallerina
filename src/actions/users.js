@@ -16,7 +16,7 @@ export function createUser(params){
     dispatch(fetchingUser())
     UserApi.create(params)
       .then(user => {
-        console.log(user)
+        console.log("in createUser:", user)
       })
   }
 }
