@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
 import UserLogin from './UserLogin.js';
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/users.js'
+import { loginUser, createUser } from '../../actions/users.js'
 import { bindActionCreators } from 'redux';
 import HomeContainer from '../HomeContainer.js'
+import { authorize } from '../authorize.js'
 
 
 class UserContainer extends Component{
 
-  handleSubmit = (input) => {
-    this.props.fetchUser(input)
+  handleLogin = (input) => {
+    this.props.loginUser(input)
   }
 
-  render(){
-    console.log("userContainer:", this.props.user)
-    if(this.props.user.id){
-      console.log("there is a user")
-    } else {
-      console.log("there is no user")
-    }
+  handleSignUp = (input) => {
+    this.props.createUser(input)
+  }
 
+
+  render(){
+    const AuthUserLogin = authorize(UserLogin)
+    const AuthHomeContainer = authorize(HomeContainer)
     return(
       <div>
-        {this.props.user.id ? (
-          < Redirect to={`/users/${this.props.user.id}`}/>
-        ) : (
-          < Redirect to='/login'/>
-        )}
         <Switch>
-          <Route path={"/login"} render={() => (<UserLogin onSubmit={this.handleSubmit}/>)}/>
-          <Route path={"/users/:id"} component={HomeContainer}/>
+          <Route path="/login" render={(props) => <AuthUserLogin onLogin={this.handleLogin} onSignUp={this.handleSignUp} {...props}/>}/>
+          <Route path="/" render={(props) => <AuthHomeContainer {...props}/>}/>
         </Switch>
       </div>
     )
@@ -45,7 +41,8 @@ function mapStateToProps(state){
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    fetchUser: fetchUser
+    loginUser: loginUser,
+    createUser: createUser
   }, dispatch)
 }
 
