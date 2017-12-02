@@ -13,6 +13,7 @@ class UserSignUp extends Component{
     e.preventDefault()
 
     let params = {user: this.state}
+    console.log("in handleSubmit:", this.state)
     this.props.onSignUp(params)
 
     this.setState({
@@ -21,7 +22,7 @@ class UserSignUp extends Component{
       password: "",
       password_confirmation: "",
     })
-    console.log(this.state)
+
   }
 
   handleChange = (e) => {
@@ -34,23 +35,23 @@ class UserSignUp extends Component{
     return(
       <div>
         <h4> Sign Up </h4>
-        <form onSubmit={this.handleSubmit} onChange={this.hangleChange}>
+        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <p>
           <label>Name: </label>
           </p>
-          <input type="text" placeholder="Name" name="name"/>
+          <input type="text" placeholder="Name" name="name" value={this.state.name}/>
           <p>
           <label>Email:</label>
           </p>
-          <input type="text" placeholder="Email" name="email"/>
+          <input type="text" placeholder="Email" name="email" value={this.state.email}/>
           <p>
           <label>Password: </label>
           </p>
-          <input type="password" placeholder="Password" name="password"/>
+          <input type="password" placeholder="Password" name="password" value={this.state.email}/>
           <p>
           <label>Confirm Password:</label>
           </p>
-          <input type="password" placeholder="Confirm Password" name="password_confirmation"/>
+          <input type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation}/>
           <p>
           <input type="submit"/>
           </p>

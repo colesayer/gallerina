@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchUser } from '../../actions/users.js'
-import { fetchArtworks, createArtwork } from '../../actions/artworks.js'
+import { fetchArtworks } from '../../actions/artworks.js'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ArtworkList from './ArtworkList.js';

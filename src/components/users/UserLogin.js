@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {Route, Link} from 'react-router-dom'
+import UserSignUp from './UserSignUp.js'
 
 class UserLogin extends Component{
   state = {
     email: "colesayerstudio@gmail.com",
-    password: "password"
+    password: "password",
+    signUp: false
   }
 
   handleEmail = (e) => {
@@ -29,7 +30,21 @@ class UserLogin extends Component{
     })
   }
 
+  handleClick = (e) => {
+    e.preventDefault()
+    console.log(this.state)
+    this.state.signUp === false ? this.setState({signUp: true}) : this.setState({signUp: false})
+
+  }
+
   render(){
+    let signUpForm
+    if(this.state.signUp === true){
+      signUpForm = <UserSignUp onSignUp={this.props.onSignUp}/>
+    } else {
+      signUpForm = null
+    }
+
     return(
       <div>
         <h4>Login</h4>
@@ -47,7 +62,8 @@ class UserLogin extends Component{
           </p>
         </form>
         <hr></hr>
-        <Link to={"/signup"}>Sign Up</Link>
+        <button onClick={this.handleClick}>Sign Up</button>
+        {signUpForm}
       </div>
     )
   }

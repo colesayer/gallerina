@@ -12,7 +12,7 @@ export function authorize(RenderedComponent) {
       console.log("in authorize", this.props)
       const { pathname } = this.props.location
 
-      if(this.loggedIn() && pathname === '/login' || this.loggedIn() && pathname === '/signup'){
+      if(this.loggedIn() && pathname === '/login'){
         return (<Redirect to="/home" />)
       } else if (!this.loggedIn() && pathname !== '/login'){
         return (<Redirect to="/login"/>)

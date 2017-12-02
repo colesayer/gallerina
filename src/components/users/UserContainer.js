@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import UserLogin from './UserLogin.js';
-import UserSignUp from './UserSignUp.js'
-import { Route, Redirect, Switch, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { loginUser, createUser } from '../../actions/users.js'
 import { bindActionCreators } from 'redux';
@@ -21,14 +20,12 @@ class UserContainer extends Component{
 
 
   render(){
-    const currentPath = this.props.match.url
     const AuthUserLogin = authorize(UserLogin)
     const AuthHomeContainer = authorize(HomeContainer)
     return(
       <div>
         <Switch>
-          <Route path="/signup" render={(props) => <UserSignUp onSignUp={this.handleSignUp} {...props}/>}/>
-          <Route path="/login" render={(props) => <AuthUserLogin onLogin={this.handleLogin} {...props}/>}/>
+          <Route path="/login" render={(props) => <AuthUserLogin onLogin={this.handleLogin} onSignUp={this.handleSignUp} {...props}/>}/>
           <Route path="/" render={(props) => <AuthHomeContainer {...props}/>}/>
         </Switch>
       </div>
