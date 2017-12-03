@@ -1,4 +1,5 @@
 import UserApi from '../services/userapi.js'
+import { clearScene } from './threeviews.js'
 
 export function loginUser(params){
   return function(dispatch){
@@ -36,6 +37,7 @@ export function fetchUser(){
       .then(user => {
         const userInfo = {id: user.id, email: user.email, name: user.name}
         dispatch(fetchedUser(userInfo))
+        dispatch(clearScene())
       })
   }
 }

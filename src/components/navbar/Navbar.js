@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { logoutUser } from '../../actions/users.js'
+import { logoutUser} from '../../actions/users.js'
 
 class Navbar extends Component{
 

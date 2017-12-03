@@ -13,8 +13,16 @@ export default class GalleryApi{
   }).then((res) => res.json())
   }
 
+  static updateGallery(gallery){
+    return fetch(`http://localhost:3000/users/${gallery.user_id}/galleries/${gallery.id}`, {method: "PATCH", headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json"
+    },
+    body: JSON.stringify(gallery)
+  }).then((res) => res.json())
+  }
+
   static deleteGallery(gallery){
-    console.log("in api deletegallery", gallery)
     return fetch(`http://localhost:3000/users/${gallery.user_id}/galleries/${gallery.id}`, {method: "delete", headers: {
       "Content-Type":"application/json",
       "Accept":"application/json"

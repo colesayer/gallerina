@@ -14,7 +14,7 @@ export default function rootReducer(
     case 'HANDLE_MESSAGE':
       return {...state, message: action.payload}
     case 'LOGOUT_USER':
-      return {...state, user: {}}
+      return {...state, user: {}, message: {}, artworks: [], selectedArtworks: [], galleries: [], selectedGallery: {}, scene: [], isLoading: false}
     case 'FETCHED_GALLERIES':
       return {...state, galleries: action.payload, isLoading: false}
     case 'FETCHING_GALLERIES':
@@ -33,6 +33,8 @@ export default function rootReducer(
       return {...state, selectedGallery: {}}
     case 'CREATE_SCENE':
       return {...state, scene: action.payload}
+    case 'CLEAR_SCENE':
+      return {...state, scene: []}
     case 'CLEAR_ARTWORKS':
       return {...state, selectedArtworks: []}
     default:

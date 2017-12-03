@@ -34,6 +34,16 @@ export function createArtwork(params){
   }
 }
 
+export function updateArtwork(params){
+  console.log("updating artwork:", params)
+  return function(dispatch){
+    ArtworkApi.updateArtwork(params)
+    .then((artworks) => {
+      dispatch(fetchedArtworks(artworks))
+    })
+  }
+}
+
 export function deleteArtwork(params){
   console.log("deleting artwork:", params)
   return function(dispatch){

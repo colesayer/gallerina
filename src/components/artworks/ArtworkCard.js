@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import ArtworkShow from './ArtworkShow.js'
+import ArtworkUpdate from './ArtworkUpdate.js'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectArtwork, deselectArtwork, deleteArtwork } from '../../actions/artworks.js'
+import { selectArtwork, deselectArtwork, updateArtwork, deleteArtwork } from '../../actions/artworks.js'
 
 class ArtworkCard extends Component{
 
   state = {
-    selected: false
+    selected: false,
+    update: false
   }
 
   handleClick = () => {
@@ -19,35 +22,29 @@ class ArtworkCard extends Component{
     }
   }
 
+  toggleUpdate = () => {
+    this.state.update === false? (this.setState({update: true})) : (this.setState({update: false}))
+  }
+
+  handleUpdate = (artwork) => {
+    this.props.updateArtwork(artwork)
+  }
+
   handleDelete = () => {
     let artwork = {...this.props.artwork, user_id: this.props.user.id}
     this.props.deleteArtwork(artwork)
   }
 
   render(){
-    let border
-    if(this.state.selected){
-      border = "dashed"
-    } else {
-      border = "none"
-    }
-    const { artwork } = this.props
-    return(
-      <div style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px"}}>
-        <li>
-          <p>{artwork.artist} </p>
-          <h3>{artwork.title} </h3>
-          <p>{artwork.date} </p>
-          <p>{artwork.materials}</p>
-          <img src={artwork.image_url} alt={artwork.title} style={{"width": "150px"}}/>
-          <p>
-            <button onClick={this.handleClick}>Select</button>
-            <button onClick={this.handleDelete} className="link-button" style={{"color": "blue", "fontSize": "small", "paddingLeft": "10px"}}>Delete</button>
-          </p>
 
-        </li>
-      </div>
-    )
+
+
+
+    if(!this.state.update){
+      return (<ArtworkShow artwork={this.props.artwork} selected={this.state.selected} onSelect={this.handleClick} onDelete={this.handleDelete} onToggleUpdate={this.toggleUpdate}/>)
+    } else {
+      return (<ArtworkUpdate artwork={this.props.artwork} user={this.props.user} onUpdate={this.handleUpdate} onToggleUpdate={this.toggleUpdate}/>)
+    }
   }
 }
 
@@ -61,6 +58,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     selectArtwork: selectArtwork,
     deselectArtwork: deselectArtwork,
+    updateArtwork: updateArtwork,
     deleteArtwork: deleteArtwork
   }, dispatch)
 }
