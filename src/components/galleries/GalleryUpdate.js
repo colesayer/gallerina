@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import { createGallery } from '../../actions/galleries.js'
 import GalleryFloor from './GalleryFloor.js'
 import GalleryColor from './GalleryColor.js'
-
 
 var floorTextureUrls = [
   'http://res.cloudinary.com/dwnehv6tb/image/upload/v1511459302/qsrgvseoqnusngtalbkc.jpg',
@@ -13,18 +9,16 @@ var floorTextureUrls = [
   'http://res.cloudinary.com/dwnehv6tb/image/upload/v1511744552/parquet_fxyelv.jpg',
   'http://res.cloudinary.com/dwnehv6tb/image/upload/v1511744552/concrete_x6iixn.jpg',
   'http://res.cloudinary.com/dwnehv6tb/image/upload/v1511744552/43041019_m_xikgxe.jpg'
-
 ]
 
-class GalleryForm extends Component{
-
+class GalleryUpdate extends Component{
   state= {
-    gallery_name: "",
-    dim_x: "",
-    dim_y: "",
-    dim_z: "",
-    floor_texture: 'http://res.cloudinary.com/dwnehv6tb/image/upload/v1511459302/qsrgvseoqnusngtalbkc.jpg',
-    wall_color: "#fff"
+    gallery_name: this.props.gallery.gallery_name,
+    dim_x: this.props.gallery.dim_x,
+    dim_y: this.props.gallery.dim_y,
+    dim_z: this.props.gallery.dim_z,
+    floor_texture: this.props.gallery.floor_texture,
+    wall_color: this.props.gallery.wall_color
   }
 
   handleGalleryName = (e) => {
@@ -65,28 +59,27 @@ class GalleryForm extends Component{
   handleSubmit = (e) => {
     e.preventDefault()
 
-    const gallery = {user_id: this.props.user.id, gallery_name: this.state.gallery_name, dim_x: this.state.dim_x, dim_y: this.state.dim_y, dim_z: this.state.dim_z, floor_texture: this.state.floor_texture, wall_color: this.state.wall_color}
+    const gallery = {
+      id: this.props.gallery.id,
+      user_id: this.props.user.id,
+      gallery_name: this.state.gallery_name,
+      dim_x: this.state.dim_x,
+      dim_y: this.state.dim_y,
+      dim_z: this.state.dim_z,
+      floor_texture: this.state.floor_texture,
+      wall_color: this.state.wall_color
+      }
 
-    this.props.createGallery(gallery)
-
-    this.setState({
-      gallery_name: "",
-      dim_x: "",
-      dim_y: "",
-      dim_z: "",
-      floor_texture: "http://res.cloudinary.com/dwnehv6tb/image/upload/v1511459302/qsrgvseoqnusngtalbkc.jpg",
-      wall_color: "#fff"
-    })
+    this.props.onUpdate(gallery)
+    this.props.onToggleUpdate(e)
   }
-
-
 
   render(){
     const floorTexturePicker = floorTextureUrls.map((texture, idx) => (<GalleryFloor key={idx} image={texture} addFloor={this.handleFloorTexture} selectedFloor={this.state.floor_texture}/>))
     return(
 
       <div>
-        <p><strong>Create A New Gallery</strong></p>
+        <p><strong>Update {this.props.gallery.gallery_name}</strong></p>
         <form onSubmit={this.handleSubmit}>
           <p>
           <label> Gallery Name: </label>
@@ -127,7 +120,8 @@ class GalleryForm extends Component{
           </p>
           {floorTexturePicker}
 
-          <input type="submit" value="Save"/>
+          <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
+          <input type="submit" value="Update"/>
         </form>
 
       </div>
@@ -135,10 +129,5 @@ class GalleryForm extends Component{
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    createGallery: createGallery
-  }, dispatch)
-}
 
-export default connect(null, mapDispatchToProps)(GalleryForm)
+export default GalleryUpdate

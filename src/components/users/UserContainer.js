@@ -25,7 +25,7 @@ class UserContainer extends Component{
     return(
       <div>
         <Switch>
-          <Route path="/login" render={(props) => <AuthUserLogin onLogin={this.handleLogin} onSignUp={this.handleSignUp} {...props}/>}/>
+          <Route path="/login" render={(props) => <AuthUserLogin onLogin={this.handleLogin} onSignUp={this.handleSignUp} message={this.props.message}{...props}/>}/>
           <Route path="/" render={(props) => <AuthHomeContainer {...props}/>}/>
         </Switch>
       </div>
@@ -36,6 +36,7 @@ class UserContainer extends Component{
 function mapStateToProps(state){
   return {
     user: state.user,
+    message: state.message
   }
 }
 

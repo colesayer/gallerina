@@ -9,8 +9,11 @@ export default class UserApi {
       },
       body: JSON.stringify(params)
     })
-      .then((res) => res.json())
-  }
+      .then((res) => {
+        if(res.ok)return res.json()
+      })
+    }
+
 
   static create(params){
     return fetch('http://localhost:3000/users/create', {
@@ -21,8 +24,11 @@ export default class UserApi {
       },
       body: JSON.stringify(params)
     })
-      .then((res) => res.json())
-  }
+    .then((res) => res.json())
+    }
+
+
+
 
   static currentUser(){
     return fetch('http://localhost:3000/users/current', {

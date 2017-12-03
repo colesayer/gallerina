@@ -5,6 +5,12 @@ export function saveScene(scene){
   }
 }
 
+export function clearScene(){
+  return {
+    type: 'CLEAR_SCENE'
+  }
+}
+
 export function clearArtworkSelection(){
   return{
     type: 'CLEAR_ARTWORKS',
