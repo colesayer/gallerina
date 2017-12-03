@@ -25,6 +25,8 @@ export default function rootReducer(
       return {...state, selectedArtworks: state.selectedArtworks.concat(action.payload)}
     case 'DESELECT_ARTWORK':
       return {...state, selectedArtworks: state.selectedArtworks.filter(artwork => artwork !== action.payload)}
+    case 'REMOVE_ARTWORK_FROM_SCENE':
+      return {...state, scene: state.scene.filter(artwork => artwork.name.id !== action.payload.id)}
     case 'CREATE_GALLERY':
       return {...state, galleries: state.galleries.concat(action.payload)}
     case 'SELECT_GALLERY':

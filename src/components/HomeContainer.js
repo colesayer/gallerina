@@ -8,7 +8,6 @@ import { Link, Route } from 'react-router-dom'
 class HomeContainer extends Component{
   render(){
     const currentPath = this.props.match.url
-    console.log(currentPath)
     return(
       <div className="container">
         <Link to={currentPath + "galleries"}>Galleries</Link>

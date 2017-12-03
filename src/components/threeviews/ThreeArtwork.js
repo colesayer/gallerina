@@ -55,10 +55,11 @@ export function threeArtwork(artwork, idx, camera, canvas, scene, addToArray, ad
         // Math.random() * 800 - 400
       )
       // paintingMesh.castShadow = true
-      paintingMesh.name = "painting"
+      paintingMesh.name = artwork
 
       let paintingControls = new TransformControls(camera, canvas)
       paintingControls.attach(paintingMesh)
+      paintingControls.name = "controls"
       paintingControls.visible = false
 
       addToArray(paintingMesh)

@@ -11,7 +11,7 @@ class ArtworkShow extends Component{
     const { artwork } = this.props
 
     let border
-    if(this.props.selected){
+    if(this.props.selected || this.props.artworkInScene){
       border = "dashed"
     } else {
       border = "none"

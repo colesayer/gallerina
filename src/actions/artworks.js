@@ -1,7 +1,6 @@
 import ArtworkApi from '../services/artworkapi.js'
 
 export function fetchArtworks(user_id){
-  console.log("in artworks.js fetchArtworks", user_id)
   return function(dispatch){
     dispatch(fetchingArtworks())
     ArtworkApi.fetchArtworks(user_id).then(artworks => {
@@ -71,6 +70,13 @@ export function selectArtwork(artwork){
 export function deselectArtwork(artwork){
   return {
     type: 'DESELECT_ARTWORK',
+    payload: artwork
+  }
+}
+
+export function removeArtworkFromScene(artwork){
+  return {
+    type: 'REMOVE_ARTWORK_FROM_SCENE',
     payload: artwork
   }
 }

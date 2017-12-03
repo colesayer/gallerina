@@ -37,7 +37,6 @@ class GalleryCard extends Component{
   }
 
   render(){
-    console.log("In galleryCard", "selectedGallery:", this.props.selectedGallery.id, "this gallery", this.props.gallery.id)
     if(!this.state.update){
       return <GalleryShow gallery={this.props.gallery} onSelected={this.handleClick} onDelete={this.handleDelete} onToggleUpdate={this.toggleUpdate} selected={this.state.selected} selectedGallery={this.props.selectedGallery}/>
     } else {

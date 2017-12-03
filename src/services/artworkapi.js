@@ -1,7 +1,6 @@
 export default class ArtworkApi {
 
   static fetchArtworks(user_id){
-    console.log("in fetchAartworks:", user_id)
     return fetch(`http://localhost:3000/users/${user_id}/artworks`).then((res) => res.json())
   }
 

@@ -11,7 +11,6 @@ class ArtworkContainer extends Component {
   componentDidMount(){
     if(!this.props.user.id)this.props.fetchUser()
     if(this.props.user.id)this.props.fetchArtworks(this.props.user.id)
-
   }
 
   render(){

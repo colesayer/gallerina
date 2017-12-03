@@ -22,10 +22,11 @@ class ThreeView extends Component{
 
   componentDidMount(){
 
+  console.log("in threeView", this.props.artworks)
+
   document.addEventListener("keydown", this.onKeyPressed.bind(this))
   document.addEventListener("keyup", this.onKeyUp.bind(this))
 
-  this.selectedArtwork
   this.artworkArray = [];
   this.controlsArray = [];
   this.wallsArray = [];
@@ -72,13 +73,7 @@ class ThreeView extends Component{
     // pointLight.castShadow = true
     this.scene.add(pointLight);
 
-
-
-  //GALLERY OBJECT
-  // const dim_x = (this.props.gallery.dim_x)
-  // const dim_y = (this.props.gallery.dim_y)
-  // const dim_z = (this.props.gallery.dim_z)
-
+  //GALLERYOBJECT
   const {
     dim_x,
     dim_y,
@@ -89,13 +84,13 @@ class ThreeView extends Component{
 
   threeGallery(dim_x, dim_y, dim_z, floor_texture, wall_color, this.scene, this.addToWallsArray)
 
-  //New Paintings
+  //MAKE New Paintings
   this.props.artworks.forEach((artwork, idx) => {
     console.log("in Painting Objects:", this.wallsArray)
     threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray, dim_x, dim_y, dim_z )
   })
 
-  //Saved Paintings
+  //LOAD Saved Paintings
   this.props.scene.forEach(artwork => {
     threeSavedArtwork(artwork, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray)
   })
@@ -106,13 +101,7 @@ class ThreeView extends Component{
   var sphere = new THREE.Mesh( geometry, material );
   this.scene.add( sphere );
 
-
-
-
-
-
   this.start()
-
   }
 
   componentWillUnmount() {
@@ -123,13 +112,12 @@ class ThreeView extends Component{
     for(let i = 0; i < filteredScene.length; i++){
       paintingsToSave.push(filteredScene[i].children[0])
     }
-    // var filteredPaintings = filteredScene.filter(child => (child.children[0].name === "painting"))
-    // console.log("IN UNMOUNT", filteredPaintings)
+
     this.props.saveScene(paintingsToSave)
     this.props.clearArtworkSelection()
     this.stop()
-    this.canvas.removeChild(this.renderer.domElement)
-    this.canvasContainer.removeChild(this.canvas)
+    // this.canvas.removeChild(this.renderer.domElement)
+    // this.canvasContainer.removeChild(this.canvas)
   }
 
 start(){
@@ -162,45 +150,44 @@ addToWallsArray = (obj) => {
 }
 
 onKeyPressed = (e) => {
-if (e.which === 67){
-  this.camera.up.set( 0, 0, 0 );
-  this.camera.position.set(0, 500, 1500)
-  this.controls.reset()
-  return
-}
-this.controlsArray.forEach(control => {
-  switch(e.which){
-    case 82:
-      control.visible = true
-      control.setMode("rotate")
-      control.setSize(.5)
-      control.setRotationSnap( THREE.Math.degToRad( 15 ) )
-      break
-    case 84:
-      control.visible = true
-      control.setSize(.5)
-      control.setMode("translate")
-      break
-    // case 67:
-    //   this.camera.up.set( 0, 0, 0 );
-    //   this.camera.position.set(0, 500, 1500)
-    //   this.controls.reset()
-    //   break
+  if (e.which === 67){
+    this.camera.up.set( 0, 0, 0 );
+    this.camera.position.set(0, 500, 1500)
+    this.controls.reset()
+    return
   }
- })
+  this.controlsArray.forEach(control => {
+    switch(e.which){
+      case 82:
+        control.visible = true
+        control.setMode("rotate")
+        control.setSize(.5)
+        control.setRotationSnap( THREE.Math.degToRad( 15 ) )
+        break
+      case 84:
+        control.visible = true
+        control.setSize(.5)
+        control.setMode("translate")
+        break
+      default:
+        break
+    }
+   })
  }
 
  onKeyUp = (e) => {
- this.controlsArray.forEach(control => {
-   switch(e.which){
-     case 82:
-       control.visible = false
-       break
-     case 84:
-       control.visible = false
-       break
-   }
-  })
+   this.controlsArray.forEach(control => {
+     switch(e.which){
+       case 82:
+         control.visible = false
+         break
+       case 84:
+         control.visible = false
+         break
+       default:
+         break
+     }
+    })
   }
 
 
