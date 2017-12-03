@@ -15,7 +15,7 @@ function fetchedArtworks(artworks){
     type: 'FETCHED_ARTWORKS',
     payload: artworks
   }
-} 
+}
 
 function fetchingArtworks(){
   return{
@@ -34,6 +34,16 @@ export function createArtwork(params){
   }
 }
 
+export function deleteArtwork(params){
+  console.log("deleting artwork:", params)
+  return function(dispatch){
+    ArtworkApi.deleteArtwork(params)
+    .then((artworks) => {
+      dispatch(fetchedArtworks(artworks))
+    })
+  }
+}
+
 export function saveArtwork(artwork){
   return {
     type: 'CREATE_ARTWORK',
@@ -44,6 +54,13 @@ export function saveArtwork(artwork){
 export function selectArtwork(artwork){
   return {
     type: 'SELECT_ARTWORK',
+    payload: artwork
+  }
+}
+
+export function deselectArtwork(artwork){
+  return {
+    type: 'DESELECT_ARTWORK',
     payload: artwork
   }
 }

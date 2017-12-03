@@ -22,6 +22,16 @@ export function createGallery(params){
   }
 }
 
+export function deleteGallery(gallery){
+  console.log("in deleteGallery:", gallery)
+  return function(dispatch){
+    GalleryApi.deleteGallery(gallery)
+      .then((galleries) => {
+        dispatch(fetchedGalleries(galleries))
+      })
+  }
+}
+
 function fetchingGalleries(){
   return{
     type: 'FETCHING_GALLERIES'
@@ -46,5 +56,11 @@ export function selectGallery(gallery){
   return {
     type: 'SELECT_GALLERY',
     payload: gallery
+  }
+}
+
+export function deselectGallery(){
+  return {
+    type: 'DESELECT_GALLERY'
   }
 }

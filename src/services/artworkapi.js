@@ -13,4 +13,13 @@ export default class ArtworkApi {
     body: JSON.stringify(params)
   }).then((res) => res.json())
   }
+
+  static deleteArtwork(params){
+    return fetch(`http://localhost:3000/users/${params.user_id}/artworks/${params.id}`, {method: "delete", headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json"
+    },
+    body: JSON.stringify(params)
+  }).then((res) => res.json())
+  }
 }

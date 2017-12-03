@@ -13,7 +13,6 @@ class UserSignUp extends Component{
     e.preventDefault()
 
     let params = {user: this.state}
-    console.log("in handleSubmit:", this.state)
     this.props.onSignUp(params)
 
     this.setState({
@@ -32,9 +31,20 @@ class UserSignUp extends Component{
   }
 
   render(){
+
+    let error
+    if(this.props.message.signup){
+      Array.isArray(this.props.message.signup) ? (error = this.props.message.signup.join(" - ")) : (error = this.props.message.signup)
+    } else {
+      error = null
+    }
+
+
+
     return(
       <div>
         <h4> Sign Up </h4>
+        <div className="errors"> <h4>{error} </h4></div>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <p>
           <label>Name: </label>
