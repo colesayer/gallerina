@@ -9,7 +9,6 @@ export function authorize(RenderedComponent) {
     }
 
     render(){
-      console.log("in authorize", this.props)
       const { pathname } = this.props.location
 
       if(this.loggedIn() && pathname === '/login'){

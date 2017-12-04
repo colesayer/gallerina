@@ -24,6 +24,7 @@ export function updateGallery(gallery){
     GalleryApi.updateGallery(gallery)
       .then((galleries) => {
         dispatch(fetchedGalleries(galleries))
+        dispatch(selectGallery(gallery))
       })
   }
 }

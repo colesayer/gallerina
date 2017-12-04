@@ -22,11 +22,14 @@ class ThreeView extends Component{
 
   componentDidMount(){
 
+  console.log("in threeView", this.props.artworks)
+
   document.addEventListener("keydown", this.onKeyPressed.bind(this))
   document.addEventListener("keyup", this.onKeyUp.bind(this))
 
-  this.selectedArtwork
   this.artworkArray = [];
+  this.paintingBoxArray = [];
+  this.galleryBoxArray = [];
   this.controlsArray = [];
   this.wallsArray = [];
 
@@ -45,8 +48,11 @@ class ThreeView extends Component{
   this.canvas.appendChild(this.renderer.domElement);
 
   //CAMERA
-  this.camera = new THREE.PerspectiveCamera(50, this.canvasArea.width / this.canvasArea.height, 1, 100000);
+  this.camera = new THREE.PerspectiveCamera(60, this.canvasArea.width / this.canvasArea.height, 10, 100000);
   this.camera.position.set(0, 500, 1500)
+
+  //RAYCASTER
+  this.raycaster = new THREE.Raycaster()
 
   //CONTROLS
   this.controls = new TrackballControls(this.camera, this.canvas);
@@ -72,13 +78,10 @@ class ThreeView extends Component{
     // pointLight.castShadow = true
     this.scene.add(pointLight);
 
+  //PHYSICS
 
 
-  //GALLERY OBJECT
-  // const dim_x = (this.props.gallery.dim_x)
-  // const dim_y = (this.props.gallery.dim_y)
-  // const dim_z = (this.props.gallery.dim_z)
-
+  //GALLERYOBJECT
   const {
     dim_x,
     dim_y,
@@ -87,32 +90,76 @@ class ThreeView extends Component{
     wall_color
   } = this.props.gallery
 
-  threeGallery(dim_x, dim_y, dim_z, floor_texture, wall_color, this.scene, this.addToWallsArray)
+  threeGallery(dim_x, dim_y, dim_z, floor_texture, wall_color, this.scene, this.addToWallsArray, this.addToGalleryBoxArray)
 
-  //New Paintings
+
+  //MAKE New Paintings
   this.props.artworks.forEach((artwork, idx) => {
     console.log("in Painting Objects:", this.wallsArray)
-    threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray, dim_x, dim_y, dim_z )
+    threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToPaintingBoxArray, this.addToControlsArray, dim_x, dim_y, dim_z )
   })
 
-  //Saved Paintings
+  //LOAD Saved Paintings
   this.props.scene.forEach(artwork => {
     threeSavedArtwork(artwork, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray)
   })
 
 
-  var geometry = new THREE.SphereGeometry( 5, 32, 32 );
-  var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-  var sphere = new THREE.Mesh( geometry, material );
-  this.scene.add( sphere );
+  //CONSTRAIN PAINTING IN SPACE
+  this.canvas.onmousemove = mouseMoveFxn.bind(this)
+    function mouseMoveFxn(event) {
+    event.preventDefault()
 
+    if(this.artworkArray.length > 0 && this.wallsArray.length > 0){
+      var walls = this.wallsArray[0].children
 
+      var leftWall = walls[0]
+      var rightWall = walls[1]
+      var farWall = walls[2]
+      var floor = walls[3]
+
+      var leftWallBox = new THREE.Box3().setFromObject(leftWall)
+      var rightWallBox = new THREE.Box3().setFromObject(rightWall)
+      var farWallBox = new THREE.Box3().setFromObject(farWall)
+      var floorBox = new THREE.Box3().setFromObject(floor)
+
+    for(let i = 0; i < this.artworkArray.length; i++){
+      var painting = this.artworkArray[i]
+      var controls = this.controlsArray[i]
+      var bbox = new THREE.Box3().setFromObject(painting)
+
+      var offsetX = ((bbox.max.x - bbox.min.x) / 2)
+      var offsetY = ((bbox.max.y - bbox.min.y) / 2)
+      var offsetZ = ((bbox.max.z - bbox.min.z) / 2)
+
+      if(bbox.intersectsBox(leftWallBox)){
+          controls.detach()
+          painting.position.set(((leftWall.position.x + offsetX) + 1), painting.position.y, painting.position.z)
+          // painting.position.set(paintingOldPosition)
+          controls.attach(painting)
+          console.log("HIT")
+        } else if(bbox.intersectsBox(rightWallBox)){
+          controls.detach()
+          painting.position.set(((rightWall.position.x - offsetX) - 1), painting.position.y, painting.position.z)
+          controls.attach(painting)
+        } else if(bbox.intersectsBox(farWallBox)){
+          controls.detach()
+          painting.position.set(painting.position.x, painting.position.y, ((farWall.position.z + offsetZ) + 1))
+          controls.attach(painting)
+        } else if(bbox.intersectsBox(floorBox)){
+          controls.detach()
+          painting.position.set(painting.position.x, ((floor.position.y + offsetY)+ 1), painting.position.z)
+          controls.attach(painting)
+        }
+      // }
+      }
+    }
+  }
 
 
 
 
   this.start()
-
   }
 
   componentWillUnmount() {
@@ -123,13 +170,12 @@ class ThreeView extends Component{
     for(let i = 0; i < filteredScene.length; i++){
       paintingsToSave.push(filteredScene[i].children[0])
     }
-    // var filteredPaintings = filteredScene.filter(child => (child.children[0].name === "painting"))
-    // console.log("IN UNMOUNT", filteredPaintings)
+
     this.props.saveScene(paintingsToSave)
     this.props.clearArtworkSelection()
     this.stop()
-    this.canvas.removeChild(this.renderer.domElement)
-    this.canvasContainer.removeChild(this.canvas)
+    // this.canvas.removeChild(this.renderer.domElement)
+    // this.canvasContainer.removeChild(this.canvas)
   }
 
 start(){
@@ -143,7 +189,6 @@ stop(){
 }
 
 animate(){
-  // if(this.artworkArray)console.log(this.artworkArray)
   this.controls.update()
   this.renderer.render(this.scene, this.camera)
   this.frameId = window.requestAnimationFrame(this.animate)
@@ -151,6 +196,14 @@ animate(){
 
 addToArray = (obj) => {
   this.artworkArray.push(obj)
+}
+
+addToPaintingBoxArray = (obj) => {
+  this.paintingBoxArray.push(obj)
+}
+
+addToGalleryBoxArray = (obj) => {
+  this.galleryBoxArray.push(obj)
 }
 
 addToControlsArray = (obj) => {
@@ -162,45 +215,48 @@ addToWallsArray = (obj) => {
 }
 
 onKeyPressed = (e) => {
-if (e.which === 67){
-  this.camera.up.set( 0, 0, 0 );
-  this.camera.position.set(0, 500, 1500)
-  this.controls.reset()
-  return
-}
-this.controlsArray.forEach(control => {
-  switch(e.which){
-    case 82:
-      control.visible = true
-      control.setMode("rotate")
-      control.setSize(.5)
-      control.setRotationSnap( THREE.Math.degToRad( 15 ) )
-      break
-    case 84:
-      control.visible = true
-      control.setSize(.5)
-      control.setMode("translate")
-      break
-    // case 67:
-    //   this.camera.up.set( 0, 0, 0 );
-    //   this.camera.position.set(0, 500, 1500)
-    //   this.controls.reset()
-    //   break
+  if (e.which === 67){
+    this.camera.up.set( 0, 0, 0 );
+    this.camera.position.set(0, 500, 1500)
+    this.controls.reset()
+    return
   }
- })
+  this.controlsArray.forEach(control => {
+    switch(e.which){
+      case 82:
+        control.visible = true
+        control.setMode("rotate")
+        control.setSize(.5)
+        control.setRotationSnap( THREE.Math.degToRad( 15 ) )
+        this.controls.enabled = false
+        break
+      case 84:
+        control.visible = true
+        control.setSize(.5)
+        control.setMode("translate")
+        this.controls.enabled = false
+        break
+      default:
+        break
+    }
+   })
  }
 
  onKeyUp = (e) => {
- this.controlsArray.forEach(control => {
-   switch(e.which){
-     case 82:
-       control.visible = false
-       break
-     case 84:
-       control.visible = false
-       break
-   }
-  })
+   this.controlsArray.forEach(control => {
+     switch(e.which){
+       case 82:
+         control.visible = false
+         this.controls.enabled = true
+         break
+       case 84:
+         control.visible = false
+         this.controls.enabled = true
+         break
+       default:
+         break
+     }
+    })
   }
 
 
@@ -227,3 +283,69 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThreeView)
+
+// Working Raycaster
+// var plane;
+//   var selectedObject;
+//   var projector = new THREE.Projector();
+//   var offset = new THREE.Vector3();
+//
+// this.canvas.onmousemove = mouseMoveFxn.bind(this)
+//   function mouseMoveFxn(event) {
+//     event.preventDefault()
+//
+//     var boundingRect = this.canvas.getBoundingClientRect();
+//     var x = (event.clientX - boundingRect.left)
+//     var y = (event.clientY - boundingRect.top)
+//
+//     var mouse_x = ( (x / this.canvasArea.width) * 2 - 1);
+//     var mouse_y = - ( y / this.canvasArea.height) * 2 + 1;
+//
+//     var vector = new THREE.Vector3( mouse_x, mouse_y, 0.5)
+//     vector.unproject(this.camera)
+//     // projector.unprojectVector( vector, this.camera)
+//
+//     this.raycaster = new THREE.Raycaster( this.camera.position, vector.sub( this.camera.position ).normalize() );
+//
+//     // if(selectedObject) {
+//     //   var intersects = raycaster.intersectObject(plane);
+//     //   if(intersects[0]){
+//     //     selectedObject.position.copy(intersects[0].point.sub( offset ) )
+//     //   }
+//       if (this.artworkArray) {
+//       var intersects = raycaster.intersectObjects(this.artworkArray, true)
+//       if ( intersects.length > 0 ) {
+//         console.log(intersects[0])
+//       }
+//     }
+//   }
+
+//WORKING COLLISION DETECTION
+// this.canvas.onmousemove = mouseMoveFxn.bind(this)
+//   function mouseMoveFxn(event) {
+//   event.preventDefault()
+//
+//   if(this.artworkArray.length > 0 && this.wallsArray.length > 0){
+//   for(let i = 0; i < this.artworkArray.length; i++){
+//     var painting = this.artworkArray[i]
+//     var bbox = new THREE.Box3().setFromObject(painting)
+//     var paintingOldPosition = new THREE.Vector3()
+//     paintingOldPosition.copy(painting.position)
+//
+//     // console.log("paintingOldPosition:", paintingOldPosition)
+//     // console.log("painting position:", painting.position)
+//
+//     for(let j = 0; j < this.wallsArray[0].children.length; j++){
+//
+//     var wall = this.wallsArray[0].children[j]
+//
+//     var bbox2 = new THREE.Box3().setFromObject(wall)
+//
+//       if(bbox.intersectsBox( bbox2)){
+//         // okToMove = false
+//         console.log("HIT")
+//       }
+//     }
+//   }
+//   }
+// }

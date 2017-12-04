@@ -42,7 +42,6 @@ class ArtworkForm extends Component{
       }
 
       if (response.body.secure_url !== ''){
-        console.log("successful upload: ", response.body.secure_url)
         this.setState({
           image_url: response.body.secure_url
         })
