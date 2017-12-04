@@ -7,7 +7,9 @@ import { authorize } from './components/authorize.js'
 
 
 class App extends Component {
-  componentDidMount(){
+  
+  componentWillReceiveProps() {
+    window.previousLocation = this.props.location
   }
 
   render() {

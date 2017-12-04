@@ -2,7 +2,7 @@ import * as THREE from 'three'
 var TransformControls = require('../../../node_modules/three-transform-controls')(THREE);
 
 
-export function threeArtwork(artwork, idx, camera, canvas, scene, addToArray, addToControlsArray, wallDimX, wallDimY, wallDimZ){
+export function threeArtwork(artwork, idx, camera, canvas, scene, addToArray, addToPaintingBoxArray, addToControlsArray, wallDimX, wallDimY, wallDimZ){
 
   //FOR PAINTING DIMS
   const ptgDimX = (artwork.dim_x * 5)
@@ -57,17 +57,28 @@ export function threeArtwork(artwork, idx, camera, canvas, scene, addToArray, ad
       // paintingMesh.castShadow = true
       paintingMesh.name = artwork
 
+      //BOUNDING BOX
+      // var paintingBox = new THREE.BoxHelper( paintingMesh );
+      // scene.add(paintingBox)
+
+
+
       let paintingControls = new TransformControls(camera, canvas)
       paintingControls.attach(paintingMesh)
+      // paintingControls.attach(paintingBox)
       paintingControls.name = "controls"
       paintingControls.visible = false
 
+      console.log("in threeartwork", paintingControls)
+
       addToArray(paintingMesh)
+      // addToPaintingBoxArray(paintingBox)
       addToControlsArray(paintingControls)
 
       let group = new THREE.Group()
       group.add(paintingMesh)
       group.add(paintingControls)
+      // group.add(paintingBox)
       group.name = "artwork"
 
 

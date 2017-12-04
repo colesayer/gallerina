@@ -10,7 +10,7 @@ class ArtworkCard extends Component{
   state = {
     selected: false,
     inScene: false,
-    update: false
+    update: false,
   }
 
   handleClick = () => {
@@ -48,6 +48,7 @@ class ArtworkCard extends Component{
     }
   }
 
+
   // shouldComponentUpdate(nextProps, nextState){
   //   console.log("should componentUpdate")
   //   console.log("thisProps:", this.props)
@@ -77,7 +78,8 @@ class ArtworkCard extends Component{
 const mapStateToProps = (state) => {
   return({
     user: state.user,
-    scene: state.scene
+    scene: state.scene,
+    selectedGallery: state.selectedGallery
   })
 }
 
