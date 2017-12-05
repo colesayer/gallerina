@@ -1,21 +1,21 @@
 import * as THREE from 'three';
 
-export function threeGallery(x, y, z, floorImage, wallColor, scene, addToWallsArray, addToGalleryBoxArray){
+export function threeGallery(gallery, scene, addToWallsArray, addToGalleryBoxArray){
 
   var galleryGroup = new THREE.Group()
-  galleryGroup.name = "gallery"
+  galleryGroup.name = gallery
 
   var boxGroup = new THREE.Group()
   boxGroup.name = "galleryBox"
 
 
   //FOR ROOM DIMS
-  const dimX = (x * 5)
-  const dimY = (y * 5)
-  const dimZ = (z * 5)
+  const dimX = (gallery.dim_x * 5)
+  const dimY = (gallery.dim_y * 5)
+  const dimZ = (gallery.dim_z * 5)
 
   //FLOOR
-  const floorImageUrl = floorImage
+  const floorImageUrl = gallery.floor_texture
   const floorLoader = new THREE.TextureLoader();
     floorLoader.load(floorImageUrl, (texture) => {
       const floorGeometry = new THREE.PlaneGeometry( dimX, dimY)
@@ -31,7 +31,7 @@ export function threeGallery(x, y, z, floorImage, wallColor, scene, addToWallsAr
       // boxGroup.add(floorBox)
     })
 
-    const wallMaterial = new THREE.MeshLambertMaterial({color: `${wallColor}` })
+    const wallMaterial = new THREE.MeshLambertMaterial({color: `${gallery.wall_color}` })
 
     var degra = (degree) => {
       return degree*(Math.PI/180);

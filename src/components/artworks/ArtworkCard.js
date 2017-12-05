@@ -13,8 +13,11 @@ class ArtworkCard extends Component{
     update: false,
   }
 
+
+
   handleClick = () => {
     if(this.state.selected === false && this.state.inScene === false){
+      if(this.props.scene)
       this.setState({selected: true})
       this.props.selectArtwork(this.props.artwork)
     } else {
@@ -48,25 +51,13 @@ class ArtworkCard extends Component{
     }
   }
 
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   console.log("should componentUpdate")
-  //   console.log("thisProps:", this.props)
-  //   console.log("nextProps:", nextProps)
-  //   console.log("thisState:", this.state)
-  //   console.log("nextState:", nextState)
-  //   return this.state.selected !== nextState.selected ||
-  //   this.state.inScene !== nextState.inScene ||
-  //   this.state.update !== nextState.update ||
-  //   this.props.scene !== nextProps.scene
-  // }
-
+  componentDidMount(){
+    const artworksInScene = this.props.scene.map(artwork => artwork.name.id)
+    if(artworksInScene.includes(this.props.artwork.id)){
+      this.setState({selected: true})
+    }
+  }
   render(){
-    // let artworkInSceneById = this.props.scene.map(artwork => (artwork.name.id))
-    // console.log("artworkInSceneById", artworkInSceneById)
-
-
-
     if(!this.state.update){
       return (<ArtworkShow artwork={this.props.artwork} selected={this.state.selected} onSelect={this.handleClick} onDelete={this.handleDelete} onToggleUpdate={this.toggleUpdate} artworkInScene={this.state.inScene}/>)
     } else {

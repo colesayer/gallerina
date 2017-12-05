@@ -82,21 +82,13 @@ class ThreeView extends Component{
 
 
   //GALLERYOBJECT
-  const {
-    dim_x,
-    dim_y,
-    dim_z,
-    floor_texture,
-    wall_color
-  } = this.props.gallery
-
-  threeGallery(dim_x, dim_y, dim_z, floor_texture, wall_color, this.scene, this.addToWallsArray, this.addToGalleryBoxArray)
+  threeGallery(this.props.gallery, this.scene, this.addToWallsArray, this.addToGalleryBoxArray)
 
 
   //MAKE New Paintings
   this.props.artworks.forEach((artwork, idx) => {
     console.log("in Painting Objects:", this.wallsArray)
-    threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToPaintingBoxArray, this.addToControlsArray, dim_x, dim_y, dim_z )
+    threeArtwork(artwork, idx, this.camera, this.canvas, this.scene, this.addToArray, this.addToPaintingBoxArray, this.addToControlsArray, this.props.gallery.dim_x, this.props.gallery.dim_y, this.props.gallery.dim_z )
   })
 
   //LOAD Saved Paintings
@@ -109,6 +101,8 @@ class ThreeView extends Component{
   this.canvas.onmousemove = mouseMoveFxn.bind(this)
     function mouseMoveFxn(event) {
     event.preventDefault()
+
+    console.log(this.scene)
 
     if(this.artworkArray.length > 0 && this.wallsArray.length > 0){
       var walls = this.wallsArray[0].children
