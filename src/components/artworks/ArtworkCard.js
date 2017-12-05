@@ -17,7 +17,7 @@ class ArtworkCard extends Component{
 
   handleClick = () => {
     if(this.state.selected === false && this.state.inScene === false){
-      if(this.props.scene)
+      if(this.props.savedArtworks)
       this.setState({selected: true})
       this.props.selectArtwork(this.props.artwork)
     } else {
@@ -41,8 +41,8 @@ class ArtworkCard extends Component{
   }
 
   componentWillReceiveProps(nextprops){
-    if(this.props.scene !== nextprops.scene){
-      let artworkInSceneById = nextprops.scene.map(artwork => (artwork.name.id))
+    if(this.props.savedArtworks !== nextprops.savedArtworks){
+      let artworkInSceneById = nextprops.savedArtworks.map(artwork => (artwork.name.id))
       if(artworkInSceneById.includes(this.props.artwork.id)){
         this.setState({inScene: true})
       } else {
@@ -52,7 +52,7 @@ class ArtworkCard extends Component{
   }
 
   componentDidMount(){
-    const artworksInScene = this.props.scene.map(artwork => artwork.name.id)
+    const artworksInScene = this.props.savedArtworks.map(artwork => artwork.name.id)
     if(artworksInScene.includes(this.props.artwork.id)){
       this.setState({selected: true})
     }
@@ -69,7 +69,7 @@ class ArtworkCard extends Component{
 const mapStateToProps = (state) => {
   return({
     user: state.user,
-    scene: state.scene,
+    savedArtworks: state.savedArtworks,
     selectedGallery: state.selectedGallery
   })
 }

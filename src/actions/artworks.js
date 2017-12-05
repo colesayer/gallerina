@@ -4,6 +4,7 @@ export function fetchArtworks(user_id){
   return function(dispatch){
     dispatch(fetchingArtworks())
     ArtworkApi.fetchArtworks(user_id).then(artworks => {
+        console.log("in fetchArtworks", artworks)
         dispatch(fetchedArtworks(artworks))
       })
   }

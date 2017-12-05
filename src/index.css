@@ -34,6 +34,21 @@ body {
 
 .gallery-list ul {
   list-style: none;
+  display: block;
+}
+
+.scene-list {
+  margin: 0 auto;
+  position: relative;
+}
+
+.scene-list ul {
+  list-style: none;
+  margin: 0 auto;
+}
+
+.scene-list li {
+  margin: 0 auto;
 }
 
 .gallery-form {
@@ -64,8 +79,13 @@ body {
 .navbar{
   float: left;
   display: block;
+  background-color: red;
   width: 100%;
-  height: 10vh;
+  height: 8vh;
+}
+
+.navbar a{
+  color: blue;
 }
 
 .navbar li{
@@ -76,7 +96,7 @@ body {
 
 .title{
   margin-top: 0;
-  padding-top: 0;
+  padding-top: 12px;
   padding-left: 10px;
   color: blue;
   float: left;
@@ -96,5 +116,5 @@ body {
 }
 
 .select-button active{
-  
+
 }

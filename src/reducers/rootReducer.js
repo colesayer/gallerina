@@ -1,5 +1,10 @@
 export default function rootReducer(
-  state = {user: {}, message: {}, artworks: [], selectedArtworks: [], galleries: [], selectedGallery: {}, scene: [], isLoading: false},
+  state = {
+  user: {}, message: {},
+  artworks: [], selectedArtworks: [], savedArtworks: [],
+  galleries: [], selectedGallery: {},
+  savedScene: [], scenes: [], selectedScene: {},
+  isLoading: false},
   action
 ){
   switch(action.type){
@@ -33,12 +38,22 @@ export default function rootReducer(
       return {...state, selectedGallery: action.payload}
     case 'DESELECT_GALLERY':
       return {...state, selectedGallery: {}}
-    case 'CREATE_SCENE':
-      return {...state, scene: action.payload}
-    case 'CLEAR_SCENE':
-      return {...state, scene: []}
+    case 'SAVE_ARTWORKS':
+      return {...state, savedArtworks: action.payload}
+    case 'CLEAR_SAVED_ARTWORKS':
+      return {...state, savedArtworks: []}
     case 'CLEAR_ARTWORKS':
       return {...state, selectedArtworks: []}
+    case 'SAVE_SCENE':
+      return {...state, savedScene: action.payload}
+    case 'FETCHING_SCENES':
+      return {...state, isLoading: true}
+    case 'FETCHED_SCENES':
+      return {...state, scenes: action.payload, isLoading: false}
+    case 'SELECT_SCENE':
+      return {...state, selectedScene: action.payload}
+    case 'DESELECT_SCENE':
+      return {...state, selectedScene: {}}
     default:
       return state
   }

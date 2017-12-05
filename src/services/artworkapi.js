@@ -12,7 +12,7 @@ export default class ArtworkApi {
     body: JSON.stringify(params)
   }).then((res) => res.json())
   }
-
+ 
   static updateArtwork(params){
     return fetch(`http://localhost:3000/users/${params.user_id}/artworks/${params.id}`, {method: "PATCH", headers: {
       "Content-Type":"application/json",

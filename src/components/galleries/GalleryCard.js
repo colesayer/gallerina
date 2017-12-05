@@ -8,7 +8,7 @@ import GalleryShow from './GalleryShow.js'
 class GalleryCard extends Component{
 
   state = {
-    update: false
+    update: false 
   }
 
   handleClick = (e) => {

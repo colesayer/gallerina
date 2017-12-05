@@ -5,7 +5,7 @@ import { threeArtwork } from './ThreeArtwork.js'
 import { threeGallery } from './ThreeGallery.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { saveScene, clearArtworkSelection } from '../../actions/threeviews.js'
+import { saveArtworks, clearArtworkSelection, saveScene } from '../../actions/threeviews.js'
 import { threeSavedArtwork } from './ThreeSavedArtwork.js'
 
 class ThreeView extends Component{
@@ -45,6 +45,7 @@ class ThreeView extends Component{
   this.renderer.setClearColor(0xffffff, 1)
   this.renderer.setSize(this.canvasArea.width, this.canvasArea.height);
   this.renderer.domElement.style.zIndex = 5;
+  // this.renderer.preserveDrawingBuffer = true
   this.canvas.appendChild(this.renderer.domElement);
 
   //CAMERA
@@ -92,7 +93,7 @@ class ThreeView extends Component{
   })
 
   //LOAD Saved Paintings
-  this.props.scene.forEach(artwork => {
+  this.props.savedArtworks.forEach(artwork => {
     threeSavedArtwork(artwork, this.camera, this.canvas, this.scene, this.addToArray, this.addToControlsArray)
   })
 
@@ -101,8 +102,6 @@ class ThreeView extends Component{
   this.canvas.onmousemove = mouseMoveFxn.bind(this)
     function mouseMoveFxn(event) {
     event.preventDefault()
-
-    console.log(this.scene)
 
     if(this.artworkArray.length > 0 && this.wallsArray.length > 0){
       var walls = this.wallsArray[0].children
@@ -157,15 +156,26 @@ class ThreeView extends Component{
   }
 
   componentWillUnmount() {
-    var filteredScene = this.scene.children.filter(child => (child.name === "artwork"))
-    console.log("IN UNMOUNT", filteredScene)
-
+    var filteredArtworks = this.scene.children.filter(child => (child.name === "artwork"))
     var paintingsToSave = []
-    for(let i = 0; i < filteredScene.length; i++){
-      paintingsToSave.push(filteredScene[i].children[0])
+    for(let i = 0; i < filteredArtworks.length; i++){
+      paintingsToSave.push(filteredArtworks[i].children[0])
     }
 
-    this.props.saveScene(paintingsToSave)
+    var galleryToSave = this.scene.children[2].name.id
+
+    var artworksToSave = []
+    for(let i = 0; i < filteredArtworks.length; i++){
+      var artwork = {gallery_id: galleryToSave, artwork_id: filteredArtworks[i].children[0].name.id, positionX: filteredArtworks[i].children[0].position.x, positionY: filteredArtworks[i].children[0].position.y, positionZ: filteredArtworks[i].children[0].position.z}
+      artworksToSave.push(artwork)
+    }
+
+    console.log("IN UNMOUNT", "Scene to Save:", artworksToSave)
+
+
+
+    this.props.saveScene(artworksToSave)
+    this.props.saveArtworks(paintingsToSave)
     this.props.clearArtworkSelection()
     this.stop()
     // this.canvas.removeChild(this.renderer.domElement)
@@ -265,81 +275,16 @@ onKeyPressed = (e) => {
 
 const mapStateToProps = (state) => {
   return{
-    scene: state.scene
+    savedArtworks: state.savedArtworks
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    saveScene: saveScene,
+    saveArtworks: saveArtworks,
     clearArtworkSelection: clearArtworkSelection,
+    saveScene: saveScene,
   }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThreeView)
-
-// Working Raycaster
-// var plane;
-//   var selectedObject;
-//   var projector = new THREE.Projector();
-//   var offset = new THREE.Vector3();
-//
-// this.canvas.onmousemove = mouseMoveFxn.bind(this)
-//   function mouseMoveFxn(event) {
-//     event.preventDefault()
-//
-//     var boundingRect = this.canvas.getBoundingClientRect();
-//     var x = (event.clientX - boundingRect.left)
-//     var y = (event.clientY - boundingRect.top)
-//
-//     var mouse_x = ( (x / this.canvasArea.width) * 2 - 1);
-//     var mouse_y = - ( y / this.canvasArea.height) * 2 + 1;
-//
-//     var vector = new THREE.Vector3( mouse_x, mouse_y, 0.5)
-//     vector.unproject(this.camera)
-//     // projector.unprojectVector( vector, this.camera)
-//
-//     this.raycaster = new THREE.Raycaster( this.camera.position, vector.sub( this.camera.position ).normalize() );
-//
-//     // if(selectedObject) {
-//     //   var intersects = raycaster.intersectObject(plane);
-//     //   if(intersects[0]){
-//     //     selectedObject.position.copy(intersects[0].point.sub( offset ) )
-//     //   }
-//       if (this.artworkArray) {
-//       var intersects = raycaster.intersectObjects(this.artworkArray, true)
-//       if ( intersects.length > 0 ) {
-//         console.log(intersects[0])
-//       }
-//     }
-//   }
-
-//WORKING COLLISION DETECTION
-// this.canvas.onmousemove = mouseMoveFxn.bind(this)
-//   function mouseMoveFxn(event) {
-//   event.preventDefault()
-//
-//   if(this.artworkArray.length > 0 && this.wallsArray.length > 0){
-//   for(let i = 0; i < this.artworkArray.length; i++){
-//     var painting = this.artworkArray[i]
-//     var bbox = new THREE.Box3().setFromObject(painting)
-//     var paintingOldPosition = new THREE.Vector3()
-//     paintingOldPosition.copy(painting.position)
-//
-//     // console.log("paintingOldPosition:", paintingOldPosition)
-//     // console.log("painting position:", painting.position)
-//
-//     for(let j = 0; j < this.wallsArray[0].children.length; j++){
-//
-//     var wall = this.wallsArray[0].children[j]
-//
-//     var bbox2 = new THREE.Box3().setFromObject(wall)
-//
-//       if(bbox.intersectsBox( bbox2)){
-//         // okToMove = false
-//         console.log("HIT")
-//       }
-//     }
-//   }
-//   }
-// }

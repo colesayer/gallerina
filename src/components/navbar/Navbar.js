@@ -17,7 +17,7 @@ class Navbar extends Component{
       <div className="navbar">
         <h1 className="title">Gallerina</h1>
         <ul>
-          <li><button className="link-button" onClick={this.handleClick}>Logout</button></li>
+          <li><button className="link-button" onClick={this.handleClick} style={{"color":"blue"}}>Logout</button></li>
           <Link to="/"><li>Home</li></Link>
         </ul>
 
