@@ -8,8 +8,13 @@ import { bindActionCreators } from 'redux';
 import { saveArtworks, clearArtworkSelection, saveScene } from '../../actions/threeviews.js'
 import { createRender, createScene } from '../../actions/scenes.js'
 import { threeSavedArtwork } from './ThreeSavedArtwork.js'
+import Modal from 'react-modal'
 
 class ThreeView extends Component{
+
+  state={
+    bool: false
+  }
 
   constructor(props){
     super(props)
@@ -23,7 +28,10 @@ class ThreeView extends Component{
 
   componentDidMount(){
 
-  console.log("in threeView", this.props.artworks)
+  Modal.setAppElement('body');
+
+
+  console.log("in threeView", this.props)
 
   document.addEventListener("keydown", this.onKeyPressed.bind(this))
   document.addEventListener("keyup", this.onKeyUp.bind(this))
@@ -52,6 +60,9 @@ class ThreeView extends Component{
   //CAMERA
   this.camera = new THREE.PerspectiveCamera(60, this.canvasArea.width / this.canvasArea.height, 10, 100000);
   this.camera.position.set(0, 500, 1500)
+  // this.camera.up = new THREE.Vector3(0,0,-1);
+  // var cameraVector = new THREE.Vector3(((this.props.gallery.dim_x * 5) / 2), ((this.props.gallery.dim_y * 5) / 2), -((this.props.gallery.dim_z * 5) / 2))
+  // this.camera.target.position.copy( cameraVector )
 
   //RAYCASTER
   this.raycaster = new THREE.Raycaster()
@@ -272,7 +283,21 @@ onKeyPressed = (e) => {
   handleRender = () => {
     var imgData = this.renderer.domElement.toDataURL()
     this.props.createRender(imgData)
+    this.setState({bool: true})
     console.log("rendered")
+  }
+
+  handleImageClose = () => {
+    this.setState({bool: false})
+  }
+
+  handleDownload = () => {
+    var link = document.createElement('a');
+    link.href = this.props.renders[0]
+    link.download = 'Render.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link)
   }
 
 
@@ -280,9 +305,19 @@ onKeyPressed = (e) => {
     return(
       <div>
       <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera || <button onClick={this.handleSave}>Save</button> || <button onClick={this.handleRender}> Render </button></p>
+      <Modal
+        isOpen={this.state.bool}
+        onRequestClose={this.handleImageClose}
+        contentLabel="Modal"
+        >
+        <button onClick={this.handleDownload} style={{"float": "right"}}>Download</button>
+        <img src={this.props.renders[0]}/>
+
+      </Modal>
       <div ref={(canvas) => {this.canvas = canvas}}>
 
       </div>
+
       </div>
     )
   }
@@ -291,7 +326,8 @@ onKeyPressed = (e) => {
 const mapStateToProps = (state) => {
   return{
     savedArtworks: state.savedArtworks,
-    user: state.user
+    user: state.user,
+    renders: state.renders
   }
 }
 

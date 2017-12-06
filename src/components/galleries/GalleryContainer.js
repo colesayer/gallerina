@@ -13,7 +13,7 @@ class GalleryContainer extends Component{
   }
   render(){
     return(
-      <div>
+      <div id="list-form">
         {this.props.isLoading ? <p>Loading Galleries</p> : null}
         <div className="gallery-list">
           <GalleryList galleries={this.props.galleries}/>

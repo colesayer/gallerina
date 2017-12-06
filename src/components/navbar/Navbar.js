@@ -14,15 +14,21 @@ class Navbar extends Component{
 
   render(){
     return(
-      <div className="navbar">
-        <h1 className="title">Gallerina</h1>
-        <ul>
-          <li><button className="link-button" onClick={this.handleClick} style={{"color":"blue"}}>Logout</button></li>
-          <Link to="/"><li>Home</li></Link>
-        </ul>
 
+        <div className="navbar">
+          <div className="title-div">
+            <h1 className="title">Gallerina</h1>
+          </div>
+          <ul>
+            <li><button className="link-button" onClick={this.handleClick} style={{"color":"blue"}}>Logout</button></li>
+            <Link to="/"><li>Home</li></Link>
+            <Link to={"/3dview"}><li>3dView</li></Link>
+            <Link to={"/scenes"}><li>Scenes</li></Link>
+            <Link to={"/galleries"}><li>Galleries</li></Link>
+            <Link to={"/artworks"}><li>Artworks</li></Link>
+          </ul>
+        </div>
 
-      </div>
 
     )
   }

@@ -5,12 +5,38 @@ body {
 }
 
 .container {
-  height: 100vh;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  height: 91vh;
+  background: white;
   width:  100%;
 }
 
 .container a{
   padding: 10px;
+}
+
+
+.form-list-container{
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  width: 100%;
+  height: 100%;
+  border-right: 5px solid black;
+}
+
+#list-form{
+  position: relative;
+  display: block;
+  float: left;
+  background: white;
+  height: 100%;
+  width: 100%;
+  border-bottom: 5px solid black;
 }
 
 
@@ -27,15 +53,76 @@ body {
 
 .gallery-list{
   position: relative;
-  width: 50%;
-  padding: 10;
+  display: block;
+  box-sizing: border-box;
+  background: repeating-linear-gradient(
+  135deg,
+  red,
+  red 5px,
+  white 5px,
+  white 10px
+);
   float: left;
+  width: 50%;
+  height: 100%;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  overflow: scroll;
 }
 
 .gallery-list ul {
+  padding: 0;
   list-style: none;
-  display: block;
+  margin: none;
 }
+
+.gallery-list li {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  background: white;
+  width: 500px;
+  height: 500px;
+  margin: 10%;
+  border: 5px solid white;
+  overflow: scroll;
+}
+
+/*.gallery-list h3 {
+  padding: 0;
+  margin: 0;
+}*/
+
+.gallery-form {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  width: 50%;
+  height: 100%;
+  background: repeating-linear-gradient(
+  45deg,
+  #FCDC00,
+  #FCDC00 5px,
+  white 5px,
+  white 10px
+);
+}
+
+#gallery-form{
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  margin: 10% auto;
+  background: white;
+  width: 500px;
+  height: 500px;
+  border: 5px solid white;
+  overflow: scroll;
+
+}
+
+
 
 .scene-list {
   position: relative;
@@ -60,12 +147,7 @@ body {
   margin: 0 auto;
 }
 
-.gallery-form {
-  width: 50%;
-  height: 50%;
-  margin: 10;
-  float: left;
-}
+
 
 
 .artwork-form {
@@ -86,12 +168,26 @@ body {
 }
 
 .navbar{
+  position: relative;
   float: left;
   display: block;
-  background-color: red;
+  box-sizing: border-box;
+  /*background-color: red;*/
   width: 100%;
   height: 8vh;
+  /*height: 91%;*/
+  /*border: 5px dashed black;*/
+  background: repeating-linear-gradient(
+  180deg,
+  black,
+  black 7%,
+  white 7%,
+  white 14%
+  );
+  background-clip: content-box;
+  border: 5px solid white;
 }
+
 
 .navbar a{
   color: blue;
@@ -100,15 +196,40 @@ body {
 .navbar li{
   display: inline-block;
   float: right;
+  margin-bottom: 15px;
   padding: 10px;
+
+
+  height: 14px;
+  background: white;
+}
+
+.navbar ul{
+  padding-right: 10px;
 }
 
 .title{
-  margin-top: 0;
-  padding-top: 12px;
-  padding-left: 10px;
-  color: blue;
+  margin-top: 15px;
+  margin-left: 10px;
+  /*padding-top: 15px;
+  padding-left: 10px;*/
+  color: #653294;
+  background-color: white;
   float: left;
+}
+
+.title-div{
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  background: repeating-linear-gradient(
+  90deg,
+  black,
+  black 5px,
+  white 5px,
+  white 10px
+  );
+  border-right: 5px solid white;
 }
 
 .link-button{
@@ -124,6 +245,72 @@ body {
   color: red;
 }
 
-.select-button active{
+.main-links{
+  position: relative;
+  float: left;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 3vh;
+  background: repeating-linear-gradient(
+  45deg,
+  white,
+  white 5px,
+  black 5px,
+  black 10px
+  );
+  border-bottom: 5px solid white;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+}
 
+.galleries-link{
+  position: relative;
+  display: block;
+  float: left;
+  padding-left: 300px;
+  line-height: 26px;
+}
+
+.galleries-link a{
+  background-color: white;
+  text-decoration: none;
+}
+
+.artworks-link{
+  position: relative;
+  display: block;
+  float: left;
+  background: repeating-linear-gradient(
+  45deg,
+  white,
+  white 5px,
+  black 5px,
+  black 10px
+  );
+  height: 100%;
+  line-height: 26px;
+  padding-left: 100px;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
+}
+
+.artworks-link a{
+  color: #FCC400;
+  background-color: white;
+  text-decoration: none;
+}
+
+.threeview-link{
+  position: relative;
+  display: block;
+  float: left;
+  line-height: 26px;
+  /*background:*/
+  padding-left: 100px;
+}
+
+.threeview-link a{
+  background-color: white;
+  text-decoration: none;
 }

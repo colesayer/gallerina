@@ -11,17 +11,23 @@ class HomeContainer extends Component{
     const currentPath = this.props.match.url
     return(
       <div className="container">
-        <Link to={currentPath + "galleries"}>Galleries</Link>
-        <Link to={currentPath + "artworks"}>Artworks</Link>
-        <Link to={currentPath + "3dview"}>3dView</Link>
-        <Link to={currentPath + "scenes"}>Scenes</Link>
-  
-        <Route exact path={currentPath + "3dview"} component={ThreeViewContainer} />
-        <Route exact path={currentPath + "scenes"} component={SceneContainer} />
-        <Route exact path={currentPath + "galleries"} render={(props) => <GalleryContainer {...props}/>} />
-        <Route exact path={currentPath + "artworks"} component={ArtworkContainer} />
-
-
+        <div className="main-links">
+          <div className="galleries-link">
+            <Link to={currentPath + "galleries"}>Galleries</Link>
+          </div>
+          <div className="artworks-link">
+            <Link to={currentPath + "artworks"}>Artworks</Link>
+          </div>
+          <div className="threeview-link">
+            <Link to={currentPath + "3dview"}>3dView</Link>
+          </div>
+        </div>
+        <div className="form-list-container">
+          <Route exact path={currentPath + "3dview"} component={ThreeViewContainer} />
+          <Route exact path={currentPath + "scenes"} component={SceneContainer} />
+          <Route exact path={currentPath + "galleries"} render={(props) => <GalleryContainer {...props}/>} />
+          <Route exact path={currentPath + "artworks"} component={ArtworkContainer} />
+        </div>
       </div>
     )
   }

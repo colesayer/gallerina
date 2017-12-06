@@ -12,8 +12,7 @@ class GalleryShow extends Component{
     }
 
     return(
-      <div style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px"}}>
-        <li>
+        <li style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px", "boxSizing": "border-box"}}>
           <h3>{gallery.gallery_name}</h3>
           <p>Width: {gallery.dim_x}"</p>
           <p>Depth: {gallery.dim_y}"</p>
@@ -34,7 +33,6 @@ class GalleryShow extends Component{
             <button onClick={this.props.onDelete} className="link-button" style={{"color": "blue", "fontSize": "small", "paddingLeft": "10px"}}>Delete</button>
           </p>
         </li>
-      </div>
     )
   }
 }

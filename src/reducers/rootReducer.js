@@ -57,7 +57,7 @@ export default function rootReducer(
     case 'DESELECT_SCENE':
       return {...state, selectedScene: {}}
     case 'CREATE_RENDER':
-      return {...state, renders: state.renders.concat(action.payload)}
+      return {...state, renders: [action.payload]}
     default:
       return state
   }

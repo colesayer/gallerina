@@ -20,9 +20,6 @@ class SceneContainer extends Component{
         <div className="scene-list">
           <SceneList scenes={this.props.scenes}/>
         </div>
-        <div className="render-list">
-          <RenderList renders={this.props.renders}/>
-        </div>
       </div>
     )
   }

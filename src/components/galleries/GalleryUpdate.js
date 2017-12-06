@@ -79,6 +79,7 @@ class GalleryUpdate extends Component{
     return(
 
       <div>
+        <li>
         <p><strong>Update {this.props.gallery.gallery_name}</strong></p>
         <form onSubmit={this.handleSubmit}>
           <p>
@@ -123,7 +124,7 @@ class GalleryUpdate extends Component{
           <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
           <input type="submit" value="Update"/>
         </form>
-
+        </li>
       </div>
     )
   }
