@@ -15,9 +15,9 @@ class HomeContainer extends Component{
         <Link to={currentPath + "artworks"}>Artworks</Link>
         <Link to={currentPath + "3dview"}>3dView</Link>
         <Link to={currentPath + "scenes"}>Scenes</Link>
-
-        <Route exact path={currentPath + "scenes"} component={SceneContainer} />
+  
         <Route exact path={currentPath + "3dview"} component={ThreeViewContainer} />
+        <Route exact path={currentPath + "scenes"} component={SceneContainer} />
         <Route exact path={currentPath + "galleries"} render={(props) => <GalleryContainer {...props}/>} />
         <Route exact path={currentPath + "artworks"} component={ArtworkContainer} />
 

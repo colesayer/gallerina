@@ -14,7 +14,7 @@ class GalleryContainer extends Component{
   render(){
     return(
       <div>
-        {this.props.isLoading ? <p>Loading Galleries</p> : <p>Galleries</p>}
+        {this.props.isLoading ? <p>Loading Galleries</p> : null}
         <div className="gallery-list">
           <GalleryList galleries={this.props.galleries}/>
         </div>

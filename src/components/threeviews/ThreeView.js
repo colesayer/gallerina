@@ -6,6 +6,7 @@ import { threeGallery } from './ThreeGallery.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { saveArtworks, clearArtworkSelection, saveScene } from '../../actions/threeviews.js'
+import { createRender, createScene } from '../../actions/scenes.js'
 import { threeSavedArtwork } from './ThreeSavedArtwork.js'
 
 class ThreeView extends Component{
@@ -41,7 +42,7 @@ class ThreeView extends Component{
   this.canvasArea = this.canvas.getBoundingClientRect()
 
   //RENDERER
-  this.renderer = new THREE.WebGLRenderer({antialias: true})
+  this.renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true})
   this.renderer.setClearColor(0xffffff, 1)
   this.renderer.setSize(this.canvasArea.width, this.canvasArea.height);
   this.renderer.domElement.style.zIndex = 5;
@@ -162,19 +163,7 @@ class ThreeView extends Component{
       paintingsToSave.push(filteredArtworks[i].children[0])
     }
 
-    var galleryToSave = this.scene.children[2].name.id
 
-    var artworksToSave = []
-    for(let i = 0; i < filteredArtworks.length; i++){
-      var artwork = {gallery_id: galleryToSave, artwork_id: filteredArtworks[i].children[0].name.id, positionX: filteredArtworks[i].children[0].position.x, positionY: filteredArtworks[i].children[0].position.y, positionZ: filteredArtworks[i].children[0].position.z}
-      artworksToSave.push(artwork)
-    }
-
-    console.log("IN UNMOUNT", "Scene to Save:", artworksToSave)
-
-
-
-    this.props.saveScene(artworksToSave)
     this.props.saveArtworks(paintingsToSave)
     this.props.clearArtworkSelection()
     this.stop()
@@ -263,11 +252,37 @@ onKeyPressed = (e) => {
     })
   }
 
+  handleSave = () => {
+    var filteredArtworks = this.scene.children.filter(child => (child.name === "artwork"))
+    var galleryToSave = this.scene.children[2].name.id
+    var image = this.renderer.domElement.toDataURL()
+    var artworksToSave = []
+    for(let i = 0; i < filteredArtworks.length; i++){
+      var artwork = {artwork_id: filteredArtworks[i].children[0].name.id, positionX: filteredArtworks[i].children[0].position.x, positionY: filteredArtworks[i].children[0].position.y, positionZ: filteredArtworks[i].children[0].position.z}
+      artworksToSave.push(artwork)
+    }
+
+    const sceneParams = {user_id: this.props.user.id, gallery_id: galleryToSave, image: image, artworks: artworksToSave }
+
+    console.log("IN SAVE", "Scene to Save:", artworksToSave)
+    this.props.createScene(sceneParams)
+
+  }
+
+  handleRender = () => {
+    var imgData = this.renderer.domElement.toDataURL()
+    this.props.createRender(imgData)
+    console.log("rendered")
+  }
+
 
   render(){
     return(
       <div>
-      <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera</p>
+      <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera || <button onClick={this.handleSave}>Save</button> || <button onClick={this.handleRender}> Render </button></p>
+      <div ref={(canvas) => {this.canvas = canvas}}>
+
+      </div>
       </div>
     )
   }
@@ -275,7 +290,8 @@ onKeyPressed = (e) => {
 
 const mapStateToProps = (state) => {
   return{
-    savedArtworks: state.savedArtworks
+    savedArtworks: state.savedArtworks,
+    user: state.user
   }
 }
 
@@ -284,6 +300,8 @@ const mapDispatchToProps = (dispatch) => {
     saveArtworks: saveArtworks,
     clearArtworkSelection: clearArtworkSelection,
     saveScene: saveScene,
+    createScene: createScene,
+    createRender: createRender,
   }, dispatch)
 }
 

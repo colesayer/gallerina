@@ -17,7 +17,6 @@ class ArtworkCard extends Component{
 
   handleClick = () => {
     if(this.state.selected === false && this.state.inScene === false){
-      if(this.props.savedArtworks)
       this.setState({selected: true})
       this.props.selectArtwork(this.props.artwork)
     } else {

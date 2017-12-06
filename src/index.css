@@ -38,8 +38,17 @@ body {
 }
 
 .scene-list {
-  margin: 0 auto;
   position: relative;
+  width: 100%;
+  padding: 10;
+  float: left;
+}
+
+.render-list {
+  position: relative;
+  width: 50%;
+  padding: 10;
+  float: left;
 }
 
 .scene-list ul {

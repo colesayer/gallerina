@@ -3,7 +3,7 @@ export default function rootReducer(
   user: {}, message: {},
   artworks: [], selectedArtworks: [], savedArtworks: [],
   galleries: [], selectedGallery: {},
-  savedScene: [], scenes: [], selectedScene: {},
+  savedScene: [], scenes: [], selectedScene: {}, renders: [],
   isLoading: false},
   action
 ){
@@ -31,7 +31,7 @@ export default function rootReducer(
     case 'DESELECT_ARTWORK':
       return {...state, selectedArtworks: state.selectedArtworks.filter(artwork => artwork !== action.payload)}
     case 'REMOVE_ARTWORK_FROM_SCENE':
-      return {...state, scene: state.scene.filter(artwork => artwork.name.id !== action.payload.id)}
+      return {...state, savedArtworks: state.savedArtworks.filter(artwork => artwork.name.id !== action.payload.id)}
     case 'CREATE_GALLERY':
       return {...state, galleries: state.galleries.concat(action.payload)}
     case 'SELECT_GALLERY':
@@ -46,6 +46,8 @@ export default function rootReducer(
       return {...state, selectedArtworks: []}
     case 'SAVE_SCENE':
       return {...state, savedScene: action.payload}
+    case 'CREATE_SCENE':
+      return {...state, scenes: state.scenes.concat(action.payload)}
     case 'FETCHING_SCENES':
       return {...state, isLoading: true}
     case 'FETCHED_SCENES':
@@ -54,6 +56,8 @@ export default function rootReducer(
       return {...state, selectedScene: action.payload}
     case 'DESELECT_SCENE':
       return {...state, selectedScene: {}}
+    case 'CREATE_RENDER':
+      return {...state, renders: state.renders.concat(action.payload)}
     default:
       return state
   }

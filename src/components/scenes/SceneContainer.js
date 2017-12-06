@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { fetchUser } from '../../actions/users.js'
 import { fetchScenes } from '../../actions/scenes.js'
 import SceneList from './SceneList.js'
+import RenderList from './RenderList.js'
 
 class SceneContainer extends Component{
   componentDidMount(){
@@ -11,12 +12,16 @@ class SceneContainer extends Component{
     if(!this.props.user.id)this.props.fetchUser()
     if(this.props.user.id)this.props.fetchScenes(this.props.user.id)
   }
+
   render(){
     return(
       <div>
-        {this.props.isLoading ? <p>Loading Scenes</p> : <p>Scenes</p>}
+        {this.props.isLoading ? <p>Loading Scenes</p> : null}
         <div className="scene-list">
           <SceneList scenes={this.props.scenes}/>
+        </div>
+        <div className="render-list">
+          <RenderList renders={this.props.renders}/>
         </div>
       </div>
     )
@@ -27,6 +32,7 @@ const mapStateToProps = (state) => {
   return{
     user: state.user,
     scenes: state.scenes,
+    renders: state.renders,
     isLoading: state.isLoading
   }
 }

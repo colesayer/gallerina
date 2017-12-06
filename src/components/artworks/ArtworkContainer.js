@@ -17,7 +17,7 @@ class ArtworkContainer extends Component {
     return(
       <div>
 
-        {this.props.isLoading ? <p>Loading Artworks</p> : <p>Artworks</p>}
+        {this.props.isLoading ? <p>Loading Artworks</p> : null}
         <div className="artwork-list">
           <ArtworkList artworks={this.props.artworks}/>
         </div>

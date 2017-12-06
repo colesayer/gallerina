@@ -35,3 +35,26 @@ export function deselectScene(){
     type: 'DESELECT_SCENE'
   }
 }
+
+export function createRender(render){
+  return{
+    type: 'CREATE_RENDER',
+    payload: render
+  }
+}
+
+export function createScene(params){
+  return function(dispatch){
+    SceneApi.createScene(params)
+      .then((scene) => {
+        dispatch(saveScene(scene))
+      })
+  }
+}
+
+export function saveScene(scene){
+  return{
+    type: 'CREATE_SCENE',
+    payload: scene
+  }
+}

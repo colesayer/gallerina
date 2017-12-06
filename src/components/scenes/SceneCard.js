@@ -27,7 +27,8 @@ class SceneCard extends Component{
       <div style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px"}}>
         <li>
           <h3>{this.props.scene.name}</h3>
-          <button onClick={this.handleClick}>Select</button>
+          <img src={this.props.scene.image} style={{"width": "150px", "margin": "0 auto", "border": "1px solid black"}}/>
+          <p><button onClick={this.handleClick} style={{"margin": "0 auto"}}>Load Scene</button></p>
         </li>
       </div>
     )
