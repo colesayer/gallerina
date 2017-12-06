@@ -26,7 +26,15 @@ body {
   float: left;
   width: 100%;
   height: 100%;
-  border-right: 5px solid black;
+  background: repeating-linear-gradient(
+  135deg,
+  #FCDC00,
+  #FCDC00 5px,
+  white 5px,
+  white 10px
+);
+  border-right: 5px solid white;
+  border-left: 5px solid white;
 }
 
 #list-form{
@@ -41,14 +49,68 @@ body {
 
 
 .artwork-list {
-  width: 50%;
-  height: 50%;
-  padding: 10;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  background: repeating-linear-gradient(
+  135deg,
+  #FCDC00,
+  #FCDC00 5px,
+  white 5px,
+  white 10px
+);
   float: left;
+  width: 50%;
+  height: 100%;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  overflow: scroll;
 }
 
 .artwork-list ul {
   list-style: none;
+}
+
+.artwork-list li {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  background: white;
+  width: 500px;
+  height: 500px;
+  margin: 10% auto;
+  border: 5px solid white;
+  overflow: scroll;
+}
+
+.artwork-form {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  width: 50%;
+  height: 100%;
+  background: repeating-linear-gradient(
+  45deg,
+  black,
+  black 5px,
+  white 5px,
+  white 10px
+  );
+}
+
+#artwork-form{
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  margin: 10% auto;
+  background: white;
+  width: 500px;
+  height: 500px;
+  border: 5px solid white;
+  overflow: scroll;
+  padding-bottom: 100px;
+
 }
 
 .gallery-list{
@@ -83,15 +145,10 @@ body {
   background: white;
   width: 500px;
   height: 500px;
-  margin: 10%;
+  margin: 10% auto;
   border: 5px solid white;
   overflow: scroll;
 }
-
-/*.gallery-list h3 {
-  padding: 0;
-  margin: 0;
-}*/
 
 .gallery-form {
   position: relative;
@@ -119,6 +176,7 @@ body {
   height: 500px;
   border: 5px solid white;
   overflow: scroll;
+  padding-bottom: 100px;
 
 }
 
@@ -131,13 +189,6 @@ body {
   float: left;
 }
 
-.render-list {
-  position: relative;
-  width: 50%;
-  padding: 10;
-  float: left;
-}
-
 .scene-list ul {
   list-style: none;
   margin: 0 auto;
@@ -145,16 +196,6 @@ body {
 
 .scene-list li {
   margin: 0 auto;
-}
-
-
-
-
-.artwork-form {
-  width: 50%;
-  height: 50%;
-  margin: 10;
-  float: left;
 }
 
 .artwork-text{
@@ -179,15 +220,14 @@ body {
   /*border: 5px dashed black;*/
   background: repeating-linear-gradient(
   180deg,
-  black,
-  black 7%,
-  white 7%,
-  white 14%
+  #0062B1,
+  #0062B1 5px,
+  white 5px,
+  white 10px
   );
   background-clip: content-box;
   border: 5px solid white;
 }
-
 
 .navbar a{
   color: blue;
@@ -221,7 +261,7 @@ body {
 .title-div{
   position: absolute;
   height: 100%;
-  width: 30%;
+  width: 29%;
   background: repeating-linear-gradient(
   90deg,
   black,
@@ -245,7 +285,7 @@ body {
   color: red;
 }
 
-.main-links{
+/*.main-links{
   position: relative;
   float: left;
   display: block;
@@ -307,10 +347,10 @@ body {
   float: left;
   line-height: 26px;
   /*background:*/
-  padding-left: 100px;
-}
+  /*padding-left: 100px;
+}*/
 
-.threeview-link a{
+/*.threeview-link a{
   background-color: white;
   text-decoration: none;
-}
+}*/

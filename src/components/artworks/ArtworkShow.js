@@ -18,8 +18,7 @@ class ArtworkShow extends Component{
     }
 
     return(
-      <div style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px"}}>
-        <li>
+        <li style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px"}}>
           <p>{artwork.artist} </p>
           <h3>{artwork.title} </h3>
           <p>{artwork.date} </p>
@@ -33,7 +32,6 @@ class ArtworkShow extends Component{
           </p>
 
         </li>
-      </div>
     )
   }
 }

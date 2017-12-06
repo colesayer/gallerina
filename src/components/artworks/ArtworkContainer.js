@@ -15,8 +15,7 @@ class ArtworkContainer extends Component {
 
   render(){
     return(
-      <div>
-
+      <div id="list-form">
         {this.props.isLoading ? <p>Loading Artworks</p> : null}
         <div className="artwork-list">
           <ArtworkList artworks={this.props.artworks}/>

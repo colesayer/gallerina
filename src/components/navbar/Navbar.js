@@ -22,10 +22,10 @@ class Navbar extends Component{
           <ul>
             <li><button className="link-button" onClick={this.handleClick} style={{"color":"blue"}}>Logout</button></li>
             <Link to="/"><li>Home</li></Link>
-            <Link to={"/3dview"}><li>3dView</li></Link>
+            <Link to={"/3dview"}><li id="three-link">3dView</li></Link>
             <Link to={"/scenes"}><li>Scenes</li></Link>
-            <Link to={"/galleries"}><li>Galleries</li></Link>
             <Link to={"/artworks"}><li>Artworks</li></Link>
+            <Link to={"/galleries"}><li>Galleries</li></Link>
           </ul>
         </div>
 

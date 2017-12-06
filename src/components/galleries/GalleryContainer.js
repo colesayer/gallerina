@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { fetchUser } from '../../actions/users.js'
-import { fetchGalleries } from '../../actions/galleries.js'
+import { fetchGalleries } from '../../actions/galleries.js' 
 import GalleryList from './GalleryList.js';
 import GalleryForm from './GalleryForm.js';
 

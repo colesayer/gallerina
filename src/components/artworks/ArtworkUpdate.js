@@ -71,8 +71,7 @@ class ArtworkUpdate extends Component{
 
   render(){
     return(
-      <div>
-
+      <li>
         <div className="ImagePreview">
         <img alt="successful upload" src={this.props.artwork.image_url} style={{"width": "150px", "margin": "0 auto"}}/>
         </div>
@@ -109,7 +108,7 @@ class ArtworkUpdate extends Component{
 
           </form>
         </div>
-      </div>
+      </li>
     )
   }
 }

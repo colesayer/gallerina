@@ -127,7 +127,7 @@ class GalleryForm extends Component{
           </p>
           {floorTexturePicker}
 
-          <input type="submit" value="Save"/>
+          <input type="submit" value="Save" style={{"marginTop": "25px"}}/>
         </form>
 
       </div>
