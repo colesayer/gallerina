@@ -37,34 +37,43 @@ class SceneCard extends Component{
     document.body.removeChild(link)
   }
 
+  handleDelete = () => {
+
+  }
+
   render(){
     console.log("in scenecard:", this.props.scene)
-    let border
+    let border = "1px solid black"
     if(this.props.selectedScene.id === this.props.scene.id){
-      border = "dashed"
+      border = "5px dashed red"
     } else {
-      border = "none"
+      border = "1px solid black"
     }
 
     let bool = this.state.imageSelected
 
     return(
-      <div style={{"borderStyle": `${border}`, "borderColor": "red", "borderRadius": "5px"}}>
-        <li>
-          <h3>{this.props.scene.name}</h3>
+        <li style={{"border": `${border}`}}>
+          <h1>{this.props.scene.name}</h1>
           <img src={this.props.scene.image} onClick={this.handleImageSelect} style={{"width": "150px", "margin": "0 auto", "border": "1px solid black"}}/>
-          <p><button onClick={this.handleClick} style={{"margin": "0 auto"}}>Load Scene</button></p>
+          <div id="scene-buttons">
+            <p>
+            <button onClick={this.handleClick} style={{"margin": "0 auto"}}className="select-button">Load</button>
+            </p>
+            <p>
+            <button onClick={this.handleDelete} className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "margin": "0 auto"}}>Delete</button>
+            </p>
+          </div>
           <Modal
             isOpen={bool}
             onRequestClose={this.handleImageClose}
             contentLabel="Modal"
             style={{overlay : {}, content : {postion: 'relative', margin: '0 auto'}}}
           >
-            <button onClick={this.handleDownload} style={{"float": "right"}}>Download</button>
+            <button onClick={this.handleDownload} className="select-button" style={{"float": "right"}}>Download</button>
             <img src={this.props.scene.image}/>
           </Modal>
         </li>
-      </div>
     )
   }
 }
@@ -78,7 +87,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     selectScene: selectScene,
-    deselectScene: deselectScene
+    deselectScene: deselectScene,
+    deleteScene: deleteScene
   }, dispatch)
 }
 

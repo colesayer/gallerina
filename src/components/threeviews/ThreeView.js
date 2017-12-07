@@ -310,7 +310,7 @@ onKeyPressed = (e) => {
         onRequestClose={this.handleImageClose}
         contentLabel="Modal"
         >
-        <button onClick={this.handleDownload} style={{"float": "right"}}>Download</button>
+        <button onClick={this.handleDownload} className="select-button" style={{"float": "right"}}>Download</button>
         <img src={this.props.renders[0]}/>
 
       </Modal>

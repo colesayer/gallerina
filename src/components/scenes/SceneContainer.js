@@ -15,7 +15,7 @@ class SceneContainer extends Component{
 
   render(){
     return(
-      <div>
+      <div id="scene-list">
         {this.props.isLoading ? <p>Loading Scenes</p> : null}
         <div className="scene-list">
           <SceneList scenes={this.props.scenes}/>

@@ -86,7 +86,7 @@ class GalleryForm extends Component{
     return(
 
       <div id="gallery-form">
-        <p><strong>Create A New Gallery</strong></p>
+        <h1>Create A New Gallery</h1>
         <form onSubmit={this.handleSubmit}>
           <p>
           <label> Gallery Name: </label>

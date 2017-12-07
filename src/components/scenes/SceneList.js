@@ -5,11 +5,9 @@ class SceneList extends Component{
   render(){
     const scenes = this.props.scenes.map((scene, idx) => <SceneCard key={idx} scene={scene}/>)
     return(
-      <div>
         <ul>
           {scenes}
         </ul>
-      </div>
     )
   }
 }

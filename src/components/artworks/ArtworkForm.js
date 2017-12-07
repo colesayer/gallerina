@@ -82,13 +82,13 @@ class ArtworkForm extends Component{
   render(){
     return(
         <div id="artwork-form">
-        <p><strong>Upload A New Artwork</strong></p>
+        <h1>Upload A New Artwork</h1>
         <div className="file-upload">
           <Dropzone
             onDrop={this.handleDrop}
             multiple={false}
             accept="image/*"
-            style={{"width": "200px", "height": "200px", "borderWidth": "2px", "borderColor": "rgb(102, 102, 102)", "borderStyle": "dashed", "borderRadius": "5px", "margin": "0 auto" }}
+            style={{"width": "200px", "height": "200px", "paddingTop": "25px", "borderWidth": "2px", "borderColor": "rgb(102, 102, 102)", "borderStyle": "dashed", "borderRadius": "5px", "margin": "0 auto"}}
             >
             <p>Drop your files or click here to upload</p>
           </Dropzone>
@@ -102,7 +102,7 @@ class ArtworkForm extends Component{
           </div>}
 
         </div>
-        <div id="artwork-form" className="artwork-text">
+        <div>
           <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
             <p>
             <label>Artist</label>
