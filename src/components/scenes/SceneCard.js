@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectScene, deselectScene } from '../../actions/scenes.js'
+import { selectScene, deselectScene, deleteScene } from '../../actions/scenes.js'
 import Modal from 'react-modal'
 
 class SceneCard extends Component{
@@ -38,7 +38,8 @@ class SceneCard extends Component{
   }
 
   handleDelete = () => {
-
+    const params = {user: this.props.user.id, scene: this.props.scene.id}
+    this.props.deleteScene(params)
   }
 
   render(){
@@ -80,7 +81,8 @@ class SceneCard extends Component{
 
 const mapStateToProps = (state) => {
   return{
-    selectedScene: state.selectedScene
+    selectedScene: state.selectedScene,
+    user: state.user
   }
 }
 

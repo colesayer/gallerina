@@ -71,12 +71,12 @@ class ArtworkUpdate extends Component{
 
   render(){
     return(
-      <li>
+      <li id="artwork-update">
         <div className="ImagePreview">
         <img alt="successful upload" src={this.props.artwork.image_url} style={{"width": "150px", "margin": "0 auto"}}/>
         </div>
 
-        <div id="artwork-form" className="artwork-text">
+        <div>
           <form onSubmit={this.handleSubmit} >
           <p>
           <label>Artist</label>
@@ -99,13 +99,13 @@ class ArtworkUpdate extends Component{
           <input type="number" onChange={this.handleDim_X} value={this.state.dim_X}/>
           </p>
           <p>
-          <label>Height in inches</label>
-          <input type="number" onChange={this.handleDim_Y} value={this.state.dim_Y}/>
+            <label>Height in inches</label>
+            <input type="number" onChange={this.handleDim_Y} value={this.state.dim_Y}/>
           </p>
-
-          <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
-          <input type="submit" value="Update" />
-
+          <input type="submit" className="select-button" value="Update" />
+          <p>
+            <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
+          </p>
           </form>
         </div>
       </li>

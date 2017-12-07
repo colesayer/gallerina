@@ -304,7 +304,7 @@ onKeyPressed = (e) => {
   render(){
     return(
       <div>
-      <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera || <button onClick={this.handleSave}>Save</button> || <button onClick={this.handleRender}> Render </button></p>
+      <p>"T" for translate controls || "R" for rotate controls || "C" to reset camera <button className="three-button" onClick={this.handleSave}>Save</button> <button className="three-button" onClick={this.handleRender}> Render </button></p>
       <Modal
         isOpen={this.state.bool}
         onRequestClose={this.handleImageClose}
@@ -312,7 +312,6 @@ onKeyPressed = (e) => {
         >
         <button onClick={this.handleDownload} className="select-button" style={{"float": "right"}}>Download</button>
         <img src={this.props.renders[0]}/>
-
       </Modal>
       <div ref={(canvas) => {this.canvas = canvas}}>
 

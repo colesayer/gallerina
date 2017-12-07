@@ -128,7 +128,7 @@ class ArtworkForm extends Component{
             <label>Height in inches</label>
             <input type="number" name="dim_Y" value={this.state.dim_Y}/>
             </p>
-            <input type="submit" value="Save" />
+            <input type="submit" className="select-button" value="Save" style={{"marginTop": "20px"}} />
 
           </form>
         </div>

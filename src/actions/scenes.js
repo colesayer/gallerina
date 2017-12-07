@@ -10,6 +10,16 @@ export function fetchScenes(user_id){
   }
 }
 
+export function deleteScene(params){
+  console.log("deleting scene:", params)
+  return function(dispatch){
+    SceneApi.deleteScene(params).then(scenes => {
+      console.log(scenes)
+      dispatch(fetchedScenes(scenes))
+    })
+  }
+}
+
 export function fetchingScenes(){
   return{
     type: 'FETCHING_SCENES'

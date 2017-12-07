@@ -44,10 +44,13 @@ class UserLogin extends Component{
   render(){
     console.log(this.state)
     let signUpForm
+    let loginHeight = "300px"
     if(this.state.signUp === true || this.props.message.signup){
       signUpForm = <UserSignUp onSignUp={this.handleSignUp} message={this.props.message}/>
+      loginHeight = "750px"
     } else {
       signUpForm = null
+      loginHeight = "300px"
     }
 
 
@@ -59,8 +62,10 @@ class UserLogin extends Component{
     }
 
 
+
+
     return(
-      <div>
+      <div className="user-login" style={{"height": `${loginHeight}`}}>
         <h4>Login</h4>
         <div className="errors"> <h4>{error} </h4></div>
         <form onSubmit={this.handleSubmit}>
@@ -72,12 +77,12 @@ class UserLogin extends Component{
           <p>
           <input type="password" onChange={this.handlePassword} value={this.state.password} placeholder="Password"/>
           </p>
+
+          <input type="submit" value="login" className="select-button" style={{"marginTop": "10px"}}/>
           <p>
-          <input type="submit" value="login"/>
           <button onClick={this.handleClick} className="link-button" style={{"color": "blue", "fontSize": "small", "paddingLeft": "10px"}}>sign up</button>
           </p>
         </form>
-        <hr></hr>
 
         {signUpForm}
       </div>
