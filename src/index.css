@@ -352,16 +352,13 @@ body {
   background-color: red;
   color: white;
 }
-.navbar a:active{
-  background-color: red;
-  color: white;
-}
 
 .navbar li{
   display: inline-block;
   float: right;
   padding-right: 50px;
   text-align: center;
+  margin: auto;
 }
 
 .navbar ul{
@@ -419,13 +416,14 @@ body {
   font-size: 16px;
   padding: 10px 20px;
   margin: 0 auto;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
+  /*-webkit-transition-duration: 10s;*/
+  transition: background-color .4s;
 }
 
 .select-button:hover{
   background-color: red; /* Green */
    color: white;
+   border: 1px solid red;
    border-radius: 0px;
    font-size: 16px;
    text-align: center;
@@ -447,8 +445,8 @@ body {
 }
 
 .three-button{
-  background-color: red;
-  color: white;
+  background-color: yellow;
+  color: black;
   border-radius: 0px;
   border: 1px solid red;
   box-sizing: border-box;

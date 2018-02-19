@@ -54,15 +54,11 @@ class ThreeView extends Component{
   this.renderer.setClearColor(0xffffff, 1)
   this.renderer.setSize(this.canvasArea.width, this.canvasArea.height);
   this.renderer.domElement.style.zIndex = 5;
-  // this.renderer.preserveDrawingBuffer = true
   this.canvas.appendChild(this.renderer.domElement);
 
   //CAMERA
   this.camera = new THREE.PerspectiveCamera(60, this.canvasArea.width / this.canvasArea.height, 10, 100000);
   this.camera.position.set(0, 500, 1500)
-  // this.camera.up = new THREE.Vector3(0,0,-1);
-  // var cameraVector = new THREE.Vector3(((this.props.gallery.dim_x * 5) / 2), ((this.props.gallery.dim_y * 5) / 2), -((this.props.gallery.dim_z * 5) / 2))
-  // this.camera.target.position.copy( cameraVector )
 
   //RAYCASTER
   this.raycaster = new THREE.Raycaster()
@@ -82,17 +78,12 @@ class ThreeView extends Component{
 
   //LIGHT1
   const keyLight = new THREE.AmbientLight(0xffffff, 0.5)
-    // keyLight.castShadow = true
-    this.scene.add(keyLight);
+  this.scene.add(keyLight);
 
   //LIGHT2
   const pointLight = new THREE.PointLight(0xffffff, 0.5)
-    pointLight.position.set(0, 0, 300)
-    // pointLight.castShadow = true
-    this.scene.add(pointLight);
-
-  //PHYSICS
-
+  pointLight.position.set(0, 0, 300)
+  this.scene.add(pointLight);
 
   //GALLERYOBJECT
   threeGallery(this.props.gallery, this.scene, this.addToWallsArray, this.addToGalleryBoxArray)
@@ -156,13 +147,9 @@ class ThreeView extends Component{
           painting.position.set(painting.position.x, ((floor.position.y + offsetY)+ 1), painting.position.z)
           controls.attach(painting)
         }
-      // }
       }
     }
   }
-
-
-
 
   this.start()
   }
@@ -178,8 +165,6 @@ class ThreeView extends Component{
     this.props.saveArtworks(paintingsToSave)
     this.props.clearArtworkSelection()
     this.stop()
-    // this.canvas.removeChild(this.renderer.domElement)
-    // this.canvasContainer.removeChild(this.canvas)
   }
 
 start(){

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ArtworkList from './ArtworkList.js';
 import ArtworkForm from './ArtworkForm.js';
-
+ 
 class ArtworkContainer extends Component {
 
   componentDidMount(){
