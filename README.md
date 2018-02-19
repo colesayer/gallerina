@@ -1,6 +1,7 @@
 ## GALLERINA
 
 A lightning fast exhibition design tool for Gallerists, Curators, and Artists!
+<img src="http://res.cloudinary.com/dwnehv6tb/image/upload/v1517022987/Screen_Shot_2018-01-26_at_10.13.44_PM_pksqnk.png" width="50%"/>
 
 ## How to Run
 
