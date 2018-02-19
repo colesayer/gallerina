@@ -13,6 +13,8 @@ class ArtworkCard extends Component{
     update: false,
   }
 
+
+
   handleClick = () => {
     if(this.state.selected === false && this.state.inScene === false){
       this.setState({selected: true})
@@ -38,8 +40,8 @@ class ArtworkCard extends Component{
   }
 
   componentWillReceiveProps(nextprops){
-    if(this.props.scene !== nextprops.scene){
-      let artworkInSceneById = nextprops.scene.map(artwork => (artwork.name.id))
+    if(this.props.savedArtworks !== nextprops.savedArtworks){
+      let artworkInSceneById = nextprops.savedArtworks.map(artwork => (artwork.name.id))
       if(artworkInSceneById.includes(this.props.artwork.id)){
         this.setState({inScene: true})
       } else {
@@ -48,25 +50,13 @@ class ArtworkCard extends Component{
     }
   }
 
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   console.log("should componentUpdate")
-  //   console.log("thisProps:", this.props)
-  //   console.log("nextProps:", nextProps)
-  //   console.log("thisState:", this.state)
-  //   console.log("nextState:", nextState)
-  //   return this.state.selected !== nextState.selected ||
-  //   this.state.inScene !== nextState.inScene ||
-  //   this.state.update !== nextState.update ||
-  //   this.props.scene !== nextProps.scene
-  // }
-
+  componentDidMount(){
+    const artworksInScene = this.props.savedArtworks.map(artwork => artwork.name.id)
+    if(artworksInScene.includes(this.props.artwork.id)){
+      this.setState({selected: true})
+    }
+  }
   render(){
-    // let artworkInSceneById = this.props.scene.map(artwork => (artwork.name.id))
-    // console.log("artworkInSceneById", artworkInSceneById)
-
-
-
     if(!this.state.update){
       return (<ArtworkShow artwork={this.props.artwork} selected={this.state.selected} onSelect={this.handleClick} onDelete={this.handleDelete} onToggleUpdate={this.toggleUpdate} artworkInScene={this.state.inScene}/>)
     } else {
@@ -78,7 +68,7 @@ class ArtworkCard extends Component{
 const mapStateToProps = (state) => {
   return({
     user: state.user,
-    scene: state.scene,
+    savedArtworks: state.savedArtworks,
     selectedGallery: state.selectedGallery
   })
 }

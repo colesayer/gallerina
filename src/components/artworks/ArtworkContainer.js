@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ArtworkList from './ArtworkList.js';
 import ArtworkForm from './ArtworkForm.js';
-
+ 
 class ArtworkContainer extends Component {
 
   componentDidMount(){
@@ -15,9 +15,8 @@ class ArtworkContainer extends Component {
 
   render(){
     return(
-      <div>
-
-        {this.props.isLoading ? <p>Loading Artworks</p> : <p>Artworks</p>}
+      <div id="list-form">
+        {this.props.isLoading ? <p>Loading Artworks</p> : null}
         <div className="artwork-list">
           <ArtworkList artworks={this.props.artworks}/>
         </div>

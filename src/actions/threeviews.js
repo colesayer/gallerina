@@ -1,18 +1,25 @@
-export function saveScene(scene){
+export function saveArtworks(artworks){
   return {
-    type: 'CREATE_SCENE',
-    payload: scene
+    type: 'SAVE_ARTWORKS',
+    payload: artworks
   }
 }
 
-export function clearScene(){
+export function clearSavedArtworks(){
   return {
-    type: 'CLEAR_SCENE'
+    type: 'CLEAR_SAVED_ARTWORKS'
   }
 }
 
 export function clearArtworkSelection(){
   return{
     type: 'CLEAR_ARTWORKS',
+  }
+}
+
+export function saveScene(scene){
+  return{
+    type: 'SAVE_SCENE',
+    payload: scene
   }
 }

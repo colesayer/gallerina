@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { fetchUser } from '../../actions/users.js'
-import { fetchGalleries } from '../../actions/galleries.js'
+import { fetchGalleries } from '../../actions/galleries.js' 
 import GalleryList from './GalleryList.js';
 import GalleryForm from './GalleryForm.js';
 
@@ -13,8 +13,8 @@ class GalleryContainer extends Component{
   }
   render(){
     return(
-      <div>
-        {this.props.isLoading ? <p>Loading Galleries</p> : <p>Galleries</p>}
+      <div id="list-form">
+        {this.props.isLoading ? <p>Loading Galleries</p> : null}
         <div className="gallery-list">
           <GalleryList galleries={this.props.galleries}/>
         </div>

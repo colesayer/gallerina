@@ -26,7 +26,7 @@ export default class UserApi {
     })
     .then((res) => res.json())
     }
-
+ 
 
 
 

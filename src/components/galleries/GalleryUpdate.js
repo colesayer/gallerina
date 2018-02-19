@@ -77,8 +77,7 @@ class GalleryUpdate extends Component{
   render(){
     const floorTexturePicker = floorTextureUrls.map((texture, idx) => (<GalleryFloor key={idx} image={texture} addFloor={this.handleFloorTexture} selectedFloor={this.state.floor_texture}/>))
     return(
-
-      <div>
+        <li id="gallery-update">
         <p><strong>Update {this.props.gallery.gallery_name}</strong></p>
         <form onSubmit={this.handleSubmit}>
           <p>
@@ -119,12 +118,12 @@ class GalleryUpdate extends Component{
           <label>Select Floor Texture:</label>
           </p>
           {floorTexturePicker}
-
-          <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
-          <input type="submit" value="Update"/>
+          <input type="submit" className="select-button" value="Update" style={{"marginTop": "25px"}}/>
+          <p>
+            <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
+          </p>
         </form>
-
-      </div>
+        </li>
     )
   }
 }

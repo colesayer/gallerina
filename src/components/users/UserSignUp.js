@@ -43,6 +43,7 @@ class UserSignUp extends Component{
 
     return(
       <div>
+        <hr></hr>
         <h4> Sign Up </h4>
         <div className="errors"> <h4>{error} </h4></div>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
@@ -63,7 +64,7 @@ class UserSignUp extends Component{
           </p>
           <input type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation}/>
           <p>
-          <input type="submit"/>
+          <input type="submit" className="select-button" style={{"marginTop": "10px"}}/>
           </p>
         </form>
       </div>

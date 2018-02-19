@@ -85,8 +85,8 @@ class GalleryForm extends Component{
     const floorTexturePicker = floorTextureUrls.map((texture, idx) => (<GalleryFloor key={idx} image={texture} addFloor={this.handleFloorTexture} selectedFloor={this.state.floor_texture}/>))
     return(
 
-      <div>
-        <p><strong>Create A New Gallery</strong></p>
+      <div id="gallery-form">
+        <h1>Create A New Gallery</h1>
         <form onSubmit={this.handleSubmit}>
           <p>
           <label> Gallery Name: </label>
@@ -127,7 +127,7 @@ class GalleryForm extends Component{
           </p>
           {floorTexturePicker}
 
-          <input type="submit" value="Save"/>
+          <input type="submit" value="Save" className="select-button" style={{"marginTop": "25px"}}/>
         </form>
 
       </div>
