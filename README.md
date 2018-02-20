@@ -2,7 +2,7 @@
 
 This is the frontend for Gallerina, my final project for the Flatiron School's software engineering program.
 
-![Gallerina Gif](https://media.giphy.com/media/9Dm6YRzgn2Qoahe75c/giphy.gif)
+![Gallerina Gif](https://media.giphy.com/media/21QEh51ORigYWkcmdU/giphy.gif)
 
 The repository for the backend can be found here: <a href="https://github.com/colesayer/final_backend">https://github.com/colesayer/final_backend</a>.
 
