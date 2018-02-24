@@ -1,7 +1,9 @@
+const baseUrl = 'https://floating-hamlet-69409.herokuapp.com/'
+
 export default class UserApi {
 
   static login(params){
-    return fetch('http://localhost:3000/user_token', {
+    return fetch(`${baseUrl}user_token`, {
       method: "POST",
       headers: {
         "Accept":"application/json",
@@ -16,7 +18,7 @@ export default class UserApi {
 
 
   static create(params){
-    return fetch('http://localhost:3000/users/create', {
+    return fetch(`${baseUrl}users/create`, {
       method: "POST",
       headers: {
         "Accept":"application/json",
@@ -26,12 +28,9 @@ export default class UserApi {
     })
     .then((res) => res.json())
     }
- 
-
-
 
   static currentUser(){
-    return fetch('http://localhost:3000/users/current', {
+    return fetch(`${baseUrl}users/current`, {
       headers: {
         "Accept":"application/json",
         "Content-Type":"application/json",
@@ -42,7 +41,7 @@ export default class UserApi {
   }
 
   static fetchUser(name){
-    return fetch('http://localhost:3000/api/v1/login',
+    return fetch(`${baseUrl}api/v1/login`,
       {method: "POST",
       headers: {
         "Content-Type":"application/json",

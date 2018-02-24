@@ -3,8 +3,8 @@ import UserSignUp from './UserSignUp.js'
 
 class UserLogin extends Component{
   state = {
-    email: "colesayerstudio@gmail.com",
-    password: "password",
+    email: "demo@demo.com",
+    password: "demodemo",
     signUp: false
   }
 
@@ -25,8 +25,8 @@ class UserLogin extends Component{
     let params = {auth: this.state}
     this.props.onLogin(params)
     this.setState({
-      email: "colesayerstudio@gmail.com",
-      password: "password"
+      email: "demo@demo.com",
+      password: "demodemo"
     })
   }
 
