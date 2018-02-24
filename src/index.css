@@ -35,7 +35,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  color: #FFFFFF;
+  color: red;
   text-shadow: 1px 1px 0 #000000, -1px 1px 0 #000000,
              1px -1px 0 #000000, -1px -1px 0 #000000;
 }
@@ -46,11 +46,10 @@ body {
   float: left;
   height: 100%;
   width: 80vw;
-  background-color: green;
 }
 
 .navbar ul{
-  background-color: yellow;
+  background-color: #D3D3D3;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -64,33 +63,40 @@ body {
 }
 
 .navbar li{
-
+  display: inline-block;
 }
 
-
-.navbar a:link{
-  background-color: white;
-  color: black;
-  padding: 10px 20px;
+.nav-button{
+  background-color: #D3D3D3;
+  padding: 10px 10px;
   margin: 10px;
   font-size: 16px;
-  text-decoration: none;
   display: inline-block;
+  float: right;
+  color: black;
   border: 1px solid black;
+}
+
+.nav-button:hover{
+  background-color: red;
+}
+
+.nav-link{
+  color: black;
+  padding: 10px 5px;
+  margin: 10px;
+  font-size: 16px;
   float: right;
 }
 
-.navbar a:hover{
-  background-color: red;
-  color: white;
+.nav-link:hover{
+  border-botton: 1px solid blue;
 }
 
-
-
-
-
-
-
+#logout-button{
+  background-color: none;
+  border: none;
+}
 
 .link-button{
     background:none;
@@ -107,24 +113,36 @@ body {
   box-sizing: border-box;
   float: left;
   height: 91vh;
-  background: white;
   width:  100%;
 }
 
-.container a{
-  padding: 10px;
-}
-
-
-.form-list-container{
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  float: left;
+.instruction-container{
+  background-color: white;
   width: 100%;
   height: 100%;
-  border-right: 5px solid white;
+  position: relative;
+  display: block;
+  float: left;
 }
+
+.instruction-container ol{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding-top: 100px;
+  margin: 0;
+
+}
+
+.instruction-container li{
+  text-align: left;
+  color: blue;
+  font-size: 300%;
+}
+
 
 #list-form{
   position: relative;

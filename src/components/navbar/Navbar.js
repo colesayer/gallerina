@@ -10,12 +10,12 @@ class Navbar extends Component{
     if(localStorage.getItem('jwtToken')){
       navLinks =
       <div>
-      <Link to="/logout"><li>Logout</li></Link>  
-      <Link to={"/scenes"}><li>Scenes</li></Link>
-      <Link to="/"><li>Home</li></Link>
-      <Link to={"/3dview"}><li id="three-link">3dView</li></Link>
-      <Link to={"/artworks"}><li>Artworks</li></Link>
-      <Link to={"/galleries"}><li>Galleries</li></Link>
+      <Link to="/logout" className="nav-link"><li>Logout</li></Link>
+      <Link to={"/scenes"} className="nav-link"><li>Scenes</li></Link>
+      <Link to="/" className="nav-link"><li>Home</li></Link>
+      <Link to={"/3dview"} className="nav-button"><li id="three-link">3dView</li></Link>
+      <Link to={"/artworks"} className="nav-button"><li>Artworks</li></Link>
+      <Link to={"/galleries"} className="nav-button"><li>Galleries</li></Link>
       </div>
     } else {
       navLinks = null
