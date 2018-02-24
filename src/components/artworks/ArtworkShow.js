@@ -14,7 +14,7 @@ class ArtworkShow extends Component{
     if(this.props.selected || this.props.artworkInScene){
       border = "5px dashed red"
     } else {
-      border = "1px solid blue"
+      border = "1px solid black"
     }
 
     return(

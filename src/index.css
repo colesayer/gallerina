@@ -74,6 +74,7 @@ body {
   float: right;
   color: black;
   border: 1px solid black;
+  transition: background-color .4s;
 }
 
 .nav-button:hover{
@@ -82,9 +83,9 @@ body {
 
 .nav-link{
   color: black;
-  padding: 10px 5px;
-  margin: 10px;
-  font-size: 16px;
+  padding: 10px 10px;
+  margin-top: 10px;
+  font-size: 14px;
   float: right;
 }
 
@@ -226,7 +227,7 @@ body {
 
 .artwork-list li h1{
   position: absolute;
-  background-color: blue;
+  background-color: #D3D3D3;
   color: white;
   top: 230px;
   left: .3em;
@@ -287,7 +288,7 @@ body {
 
 .gallery-list li h1{
   position: absolute;
-  background-color: blue;
+  background-color: #D3D3D3;
   color: white;
   top: 230px;
   left: .3em;
@@ -460,8 +461,8 @@ body {
 
 .select-button:hover{
   background-color: red;
-   color: white;
-   border: 1px solid red;
+   color: black;
+   border: 1px solid black;
    border-radius: 0px;
    font-size: 16px;
    text-align: center;
