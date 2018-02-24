@@ -59,7 +59,7 @@ class SceneCard extends Component{
           <img src={this.props.scene.image} onClick={this.handleImageSelect} style={{"width": "150px", "margin": "0 auto", "border": "1px solid black"}}/>
           <div id="scene-buttons">
             <p>
-            <button onClick={this.handleClick} style={{"margin": "0 auto"}}className="select-button">Load</button>
+            <button disabled={true} onClick={this.handleClick} style={{"margin": "0 auto"}}className="scene-select-button">Load</button>
             </p>
             <p>
             <button onClick={this.handleDelete} className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "margin": "0 auto"}}>Delete</button>

@@ -18,22 +18,21 @@ class ArtworkShow extends Component{
     }
 
     return(
-        <li style={{"border": `${border}`}}>
-          <h1>{artwork.artist} </h1>
-          <h3>{artwork.title} </h3>
-          <p>{artwork.date} </p>
-          <p>{artwork.materials}</p>
-          <p>{artwork.dim_x}" x {artwork.dim_y}"</p>
-          <img src={artwork.image_url} alt={artwork.title} style={{"width": "150px"}}/>
-          <p>
-            <button onClick={this.handleClick} className="select-button">Select</button>
-            </p>
-            <p>
-            <button onClick={this.props.onToggleUpdate}className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "marginRight": "10px"}}>Update</button>
-            <button onClick={this.props.onDelete} className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "marginLeft": "10px"}}>Delete</button>
+      <li style={{"border": `${border}`}}>
+        <h1>{artwork.artist} </h1>
+        <h3>{artwork.title} </h3>
+        <p>{artwork.date} </p>
+        <p>{artwork.materials}</p>
+        <p>{artwork.dim_x}" x {artwork.dim_y}"</p>
+        <img src={artwork.image_url} alt={artwork.title} style={{"width": "150px"}}/>
+        <p>
+          <button onClick={this.handleClick} className="select-button">Select</button>
           </p>
-
-        </li>
+          <p>
+          <button onClick={this.props.onToggleUpdate}className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "marginRight": "10px"}}>Update</button>
+          <button onClick={this.props.onDelete} className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "marginLeft": "10px"}}>Delete</button>
+        </p>
+      </li>
     )
   }
 }

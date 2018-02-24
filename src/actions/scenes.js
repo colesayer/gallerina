@@ -54,6 +54,7 @@ export function createRender(render){
 }
 
 export function createScene(params){
+  console.log("in create scene", params)
   return function(dispatch){
     SceneApi.createScene(params)
       .then((scene) => {
