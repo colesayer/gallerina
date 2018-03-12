@@ -19,8 +19,8 @@ class GalleryFloor extends Component{
         border = "none"
       }
     return(
-      <div>
-        <img onClick={this.handleClick} alt="floor texture" src={this.props.image} style={{"width": "150px", "borderStyle": `${border}`, "borderColor": "red", "margin": "0 auto"}}/>
+      <div className="gallery-floor">
+        <img onClick={this.handleClick} alt="floor texture" src={this.props.image} style={{"height": "75px", "borderStyle": `${border}`, "borderColor": "red", "margin": "0 auto"}}/>
 
       </div>
 
@@ -29,9 +29,3 @@ class GalleryFloor extends Component{
 }
 
 export default GalleryFloor
-
-// <p>
-// <button onClick={this.handleClick} className="select-button">Select</button>
-// </p>
-
-// , "width": "200px", "height": "200px"

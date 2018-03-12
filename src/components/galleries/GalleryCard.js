@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal'
+import GalleryUpdate from './GalleryUpdate.js'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectGallery, deselectGallery, updateGallery, deleteGallery } from '../../actions/galleries.js'
-import GalleryUpdate from './GalleryUpdate.js'
-import GalleryShow from './GalleryShow.js'
+
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class GalleryCard extends Component{
 
   state = {
-    update: false 
+    editModalIsOpen: false,
+    deleteModalIsOpen: false
   }
 
-  handleClick = (e) => {
-    e.preventDefault()
+  handleClick = () => {
     if(this.props.selectedGallery.id !== this.props.gallery.id){
       this.props.selectGallery(this.props.gallery)
     } else {
@@ -20,28 +32,88 @@ class GalleryCard extends Component{
     }
   }
 
-  toggleUpdate = (e) => {
-    e.preventDefault()
-    this.state.update === false ? (this.setState({update: true})) : (this.setState({update: false}))
+  openEditModal = () => {
+    this.setState({
+      editModalIsOpen: true
+    })
   }
 
-  handleUpdate = (gallery) => {
-    this.props.updateGallery(gallery)
+  openDeleteModal = () => {
+    this.setState({
+      deleteModalIsOpen: true
+    })
   }
 
+  closeModal = () => {
+    this.setState({
+      editModalIsOpen: false,
+      deleteModalIsOpen: false
+    })
+  }
 
-  handleDelete = (e) => {
-    e.preventDefault()
+  handleDelete = () => {
     let gallery = {...this.props.gallery, user_id: this.props.user.id}
     this.props.deleteGallery(gallery)
   }
 
+  handleUpdate = (gallery) => {
+    console.log("UPDATE", gallery)
+    this.props.updateGallery(gallery)
+  }
+
   render(){
-    if(!this.state.update){
-      return <GalleryShow gallery={this.props.gallery} onSelected={this.handleClick} onDelete={this.handleDelete} onToggleUpdate={this.toggleUpdate} selected={this.state.selected} selectedGallery={this.props.selectedGallery}/>
+    const { gallery } = this.props
+
+
+    let border = "1px solid black"
+    if(this.props.selectedGallery.id === this.props.gallery.id){
+      border = "5px dashed red"
     } else {
-      return <GalleryUpdate gallery={this.props.gallery} onToggleUpdate={this.toggleUpdate} onUpdate={this.handleUpdate} user={this.props.user}/>
+      border = "1px solid black"
     }
+
+    return(
+      <li onClick={this.handleClick} style={{"border": `${border}`, backgroundColor: `${gallery.wall_color}`}}>
+        <div className="gallery-list-wall">
+          <h1>{gallery.gallery_name}</h1>
+          <p style={{color: 'grey'}}> {gallery.dim_x}" x {gallery.dim_y}" x {gallery.dim_z}"</p>
+          <button onClick={this.openEditModal} className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "marginRight": "10px"}}>Update</button>
+          <button onClick={this.openDeleteModal} className="link-button" style={{"color": "blue", "fontSize": "small", "marginBottom": "10px", "marginLeft": "10px"}}>Delete</button>
+        </div>
+
+
+        <div className="gallery-list-floor" style={{backgroundImage: `url(${gallery.floor_texture})`}}>
+        </div>
+
+        <Modal
+          isOpen={this.state.deleteModalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <div>
+            <h4>Are you sure you want to delete?</h4>
+            <div>
+              <button onClick={this.handleDelete} className="select-button">Delete</button>
+              <button onClick={this.closeModal} className="select-button">Cancel</button>
+            </div>
+          </div>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.editModalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <GalleryUpdate gallery={gallery} onUpdate={this.handleUpdate} user={this.props.user} onCloseModal={this.closeModal}/>
+        </Modal>
+
+      </li>
+
+    )
   }
 }
 

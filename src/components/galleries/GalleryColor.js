@@ -9,7 +9,7 @@ class GalleryColor extends Component{
 
   render(){
     return(
-      <div>
+      <div className="gallery-color-container">
         <CompactPicker color={this.props.color} onChangeComplete={this.handleChangeComplete}/>
       </div>
     )

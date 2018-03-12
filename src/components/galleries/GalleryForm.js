@@ -84,53 +84,49 @@ class GalleryForm extends Component{
   render(){
     const floorTexturePicker = floorTextureUrls.map((texture, idx) => (<GalleryFloor key={idx} image={texture} addFloor={this.handleFloorTexture} selectedFloor={this.state.floor_texture}/>))
     return(
+      <div className="gallery-form">
+        <form onSubmit={this.handleSubmit} style={{width: '100%', height: '100%'}}>
 
-      <div id="gallery-form">
-        <h1>Create A New Gallery</h1>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-          <label> Gallery Name: </label>
-          </p>
-          <p>
-          <input type="text" onChange={this.handleGalleryName} value={this.state.gallery_name} required/>
-          </p>
+          <div className="gallery-form-title">
+            <h1>Create A New Gallery</h1>
+          </div>
 
-          <p>
-          <label> Width in inches: </label>
-          </p>
-          <p>
-          <input type="number" onChange={this.handleDimX} value={this.state.dim_x} required/>
-          </p>
-
-          <p>
-          <label> Depth in inches: </label>
-          </p>
-          <p>
-          <input type="number" onChange={this.handleDimY} value={this.state.dim_y} required/>
-          </p>
-
-          <p>
-          <label> Height in inches: </label>
-          </p>
-          <p>
-          <input type="number" onChange={this.handleDimZ} value={this.state.dim_z} required/>
-          </p>
-
-          <p>
-          <label>Select Wall Color:</label>
-          </p>
-          <GalleryColor color={this.state.wall_color} onColorPick={this.handleColorChange} style={{"margin": "0 auto"}}/>
-
-
-          <p>
-          <label>Select Floor Texture:</label>
-          </p>
-          {floorTexturePicker}
-
-          <input type="submit" value="Save" className="select-button" style={{"marginTop": "25px"}}/>
+          <div className="gallery-form-inputs">
+            <ul className="gallery-form-inputs-wrapper">
+              <li className="gallery-form-inputs-row">
+                <label htmlFor="gallery-name">Gallery Name</label>
+                <input type="text" id="gallery-name"/>
+              </li>
+              <li className="gallery-form-inputs-row">
+                <label htmlFor="gallery-width">Width(in)</label>
+                <input type="number" id="gallery-width"/>
+              </li>
+              <li className="gallery-form-inputs-row">
+                <label htmlFor="gallery-depth">Depth(in)</label>
+                <input type="number" id="gallery-depth"/>
+              </li>
+              <li className="gallery-form-inputs-row">
+                <label htmlFor="gallery-height">Height(in)</label>
+                <input type="number" id="gallery-height"/>
+              </li>
+              <li className="gallery-form-inputs-row">
+                <label htmlFor="wall-color">Wall Color</label>
+                <GalleryColor id="wall-color" color={this.state.wall_color} onColorPick={this.handleColorChange} style={{"margin": "0 auto"}}/>
+              </li>
+              <li className="gallery-form-inputs-row">
+                <label htmlFor="floor-texture">Floor Texture</label>
+                <ul>
+                {floorTexturePicker}
+                </ul>
+              </li>
+              <li>
+                <input type="submit" value="Save" className="select-button" style={{"marginTop": "25px"}}/>
+              </li>
+            </ul>
+          </div>
         </form>
-
       </div>
+
     )
   }
 }
@@ -142,3 +138,45 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(GalleryForm)
+
+
+
+// <div className="gallery-form">
+//   <h1>Create A New Gallery</h1>
+//   <form onSubmit={this.handleSubmit}>
+//
+//     <div className="gallery-form-dims">
+//       <label> Gallery Name: </label>
+//       <input type="text" onChange={this.handleGalleryName} value={this.state.gallery_name} required/>
+//       <label> Width in inches: </label>
+//       <input type="number" onChange={this.handleDimX} value={this.state.dim_x} required/>
+//       <label> Depth in inches: </label>
+//       <input type="number" onChange={this.handleDimY} value={this.state.dim_y} required/>
+//       <label> Height in inches: </label>
+//       <input type="number" onChange={this.handleDimZ} value={this.state.dim_z} required/>
+//     </div>
+//
+//     <div className="gallery-form-wall-color">
+//       <label>Select Wall Color:</label>
+//       <GalleryColor color={this.state.wall_color} onColorPick={this.handleColorChange} style={{"margin": "0 auto"}}/>
+//     </div>
+//
+//     <div className="gallery-form-floor-texture">
+//       <label>Select Floor Texture:</label>
+//       {floorTexturePicker}
+//     </div>
+//
+//
+//   </form>
+//
+// </div>
+
+
+
+
+// <label>Select Wall Color:</label>
+// <GalleryColor color={this.state.wall_color} onColorPick={this.handleColorChange} style={{"margin": "0 auto"}}/>
+
+// <label>Select Floor Texture:</label>
+
+// {floorTexturePicker}

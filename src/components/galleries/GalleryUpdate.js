@@ -56,8 +56,10 @@ class GalleryUpdate extends Component{
     })
   }
 
-  handleSubmit = (e) => {
+  handleClick = (e) => {
     e.preventDefault()
+
+
 
     const gallery = {
       id: this.props.gallery.id,
@@ -70,8 +72,9 @@ class GalleryUpdate extends Component{
       wall_color: this.state.wall_color
       }
 
+
     this.props.onUpdate(gallery)
-    this.props.onToggleUpdate(e)
+    this.props.onCloseModal()
   }
 
   render(){
@@ -118,9 +121,9 @@ class GalleryUpdate extends Component{
           <label>Select Floor Texture:</label>
           </p>
           {floorTexturePicker}
-          <input type="submit" className="select-button" value="Update" style={{"marginTop": "25px"}}/>
+            <button onClick={this.handleClick} className="select-button">Update</button>
           <p>
-            <button className="link-button" onClick={this.props.onToggleUpdate} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
+            <button className="link-button" onClick={this.props.onCloseModal} style={{"color": "blue", "fontSize": "small", "paddingRight": "10px"}}>{"<<Back"}</button>
           </p>
         </form>
         </li>
@@ -130,3 +133,5 @@ class GalleryUpdate extends Component{
 
 
 export default GalleryUpdate
+
+// <input type="submit" className="select-button" value="Update" style={{"marginTop": "25px"}}/>
