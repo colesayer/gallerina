@@ -1,5 +1,5 @@
 ## Welcome To Gallerina.
-<a href="https://gallerina.herokuapp.com/">https://gallerina.herokuapp.com/</a>(if the link seems unresponsive, give it time! That is the heroku server spinning up.)
+<a href="https://gallerina.herokuapp.com/">https://gallerina.herokuapp.com/</a> (if the link seems unresponsive, give it time! That is the heroku server spinning up.)
 
 This is the frontend for Gallerina, my final project for the Flatiron School's software engineering program.
 
