@@ -435,6 +435,13 @@ body {
   border: 1px solid black;
 }
 
+.heroku-disclaimer{
+  margin-top: 50px;
+  letter-spacing: 2px;
+  background-color: yellow;
+  padding: 10px;
+}
+
 .file-upload{
   padding: 10;
   display: block;

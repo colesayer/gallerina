@@ -45,12 +45,16 @@ class UserLogin extends Component{
     console.log(this.state)
     let signUpForm
     let loginHeight = "300px"
+    let herokuMessage
     if(this.state.signUp === true || this.props.message.signup){
       signUpForm = <UserSignUp onSignUp={this.handleSignUp} message={this.props.message}/>
       loginHeight = "750px"
+      herokuMessage = null
     } else {
       signUpForm = null
       loginHeight = "300px"
+      herokuMessage = <div className="heroku-disclaimer"><span>*This site runs on the free tier of Heroku. After hitting the login button, please allow a minute for the Heroku server to spin up.</span></div>
+
     }
 
 
@@ -83,6 +87,7 @@ class UserLogin extends Component{
           <button onClick={this.handleClick} className="link-button" style={{"color": "blue", "fontSize": "small", "paddingLeft": "10px"}}>sign up</button>
           </p>
         </form>
+          {herokuMessage}
 
         {signUpForm}
       </div>
